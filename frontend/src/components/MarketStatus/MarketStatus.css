@@ -1,0 +1,456 @@
+  .market-status-container {
+    width: 95vw;
+    margin-right: 15%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tab-container {
+    display: flex;
+    justify-content: center;
+    margin-left: 38%;
+  }
+  /* MarketStatus.css */
+  .separator {
+  display: block;    /* ensures it takes up its own line */
+  width: 100%;       /* full width to force a new row in flex/grid layouts */
+  margin: 20px 0;    /* vertical spacing between Bearish and Bullish */
+  } 
+  .tab {
+    padding: 12px 10px;
+    border-radius: 12px;
+    width: 120px;
+    margin: auto;
+    border: none;
+    background: #555;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: bold;
+    margin-top: 15px !important;
+  }
+
+  .tab.active {
+    background: #161616;
+    color: white;
+  }
+  .separator {
+  display: block;
+  width: 100%;
+  margin: 20px 0;
+  grid-column: 1 / -1;
+  }
+
+  .market-stocks-container {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+    padding: 10px;
+  }
+  .live-bb-container {
+  display: grid !important;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+  padding: 10px;
+  }
+  .stock-box {
+    width: 242px;
+    background: #f9f9f9;
+    padding: 8px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .live-stock-box {
+  width: 200px;
+  }
+
+  .stock-symbol {
+    font-size: 10px;
+    font-weight: bold;
+  }
+
+  .radio-group {
+    display: flex;
+    gap: 10px;
+  }
+  .market-submit-button {
+    background-color: #4d4d4d;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: center;
+    margin-top: 5px !important;
+  }
+
+  .market-submit-button:disabled {
+    background-color: #b0b0b0;
+    cursor: not-allowed;
+    opacity: 0.5;  /* Faded effect */
+  }
+
+  .market-submit-button:not(:disabled):hover {
+    background-color: #191919;
+  }
+
+  .radio-group {
+    display: flex;
+    gap: 5px;
+    margin-top: 5px;
+    align-items: center;
+  }
+
+  .radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    background: #f3f4f6; /* Light gray background */
+    padding: 4px 2px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .radio-group input[type="radio"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #6b7280; /* Gray border */
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .radio-group input[type="radio"]:checked[value="BULLISH"] {
+    border-color: green;
+    background-color: green;
+  }
+
+  .radio-group input[type="radio"]:checked[value="BEARISH"] {
+    border-color: red;
+    background-color: red;
+  }
+
+  .radio-group input[type="radio"]:checked::before {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .radio-group label:hover {
+    background: #e5e7eb; /* Slightly darker gray on hover */
+  }
+
+  .radio-group input[type="radio"]:checked + label {
+    background: #2563eb;
+    color: white;
+  }
+
+  /* Css for toggle switch */
+  .switch-button {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    justify-content: center;
+    margin: auto;
+    height: 25px;
+  }
+
+  .switch-button .switch-outer {
+    height: 100%;
+    background: #252532;
+    width: 50px;
+    border-radius: 160px;
+    -webkit-box-shadow: inset 0px 5px 10px 0px #16151c, 0px 3px 6px -2px #403f4e;
+    box-shadow: inset 0px 5px 10px 0px #16151c, 0px 3px 6px -2px #403f4e;
+    border: 1px solid #32303e;
+    padding: 4px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .switch-button .switch-outer input[type="checkbox"] {
+    opacity: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: absolute;
+  }
+
+  .switch-button .switch-outer .button-toggle {
+    height: 16px;
+    width: 16px;
+    background: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(#3b3a4e),
+      to(#272733)
+    );
+    background: -o-linear-gradient(#3b3a4e, #272733);
+    background: linear-gradient(#3b3a4e, #272733);
+    border-radius: 100%;
+    -webkit-box-shadow: inset 0px 5px 4px 0px #424151, 0px 4px 15px 0px #0f0e17;
+    box-shadow: inset 0px 5px 4px 0px #424151, 0px 4px 15px 0px #0f0e17;
+    position: relative;
+    z-index: 2;
+    -webkit-transition: left 0.3s ease-in;
+    -o-transition: left 0.3s ease-in;
+    transition: left 0.3s ease-in;
+    left: 0;
+  }
+
+  .switch-button
+    .switch-outer
+    input[type="checkbox"]:checked
+    + .button
+    .button-toggle {
+    left: 50%;
+  }
+
+  .switch-button
+    .switch-outer
+    input[type="checkbox"]:checked
+    + .button
+    .button-indicator {
+    -webkit-animation: indicator 1s forwards;
+    animation: indicator 1s forwards;
+  }
+
+  .switch-button .switch-outer .button {
+    width: 100%;
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    position: relative;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+  }
+
+  .switch-button .switch-outer .button-indicator {
+    height: 16px;
+    width: 16px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    border-radius: 50%;
+    border: 3px solid #ef565f;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    right: 2px;
+    position: relative;
+  }
+
+  @-webkit-keyframes indicator {
+    30% {
+      opacity: 0;
+    }
+
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 1;
+      border: 3px solid #60d480;
+      left: -68%;
+    }
+  }
+
+  @keyframes indicator {
+    30% {
+      opacity: 0;
+    }
+
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 1;
+      border: 3px solid #60d480;
+      left: -60%;
+    }
+  }
+
+  .toggle-switch-container {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+
+  .toggle-text{
+    padding: 0px 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 12px;
+  }
+
+  .live-checkbox {
+    border-radius: 4px;
+    width: 20px;
+    height: 20px;
+    margin-right: 0.5rem;
+    appearance: none;
+    border: 2px solid gray;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .live-checkbox:checked {
+    background-color: black;
+    border-color: black;
+  }
+
+  .live-checkbox:checked::after {
+  content: '✔';
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  position: absolute;
+  }
+  .disabled-container {
+  opacity: 0.5;
+  pointer-events: none;
+  }
+
+  .selection-msg {
+  color: red;
+  text-align: center;
+  }
+
+
+  .markets-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  }
+  @media (max-width: 768px) {
+    .market-status-container {
+        padding: 0px;
+    }
+
+    .tab {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+        flex: 1 1 auto;
+    }
+
+    .toggle-switch-container {
+        flex-direction: column;
+        margin-top: 0;
+    }
+
+    .radio-group {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .stock-symbol {
+        font-size: 10px;
+    }
+
+    .market-submit-button {
+        width: 30%;
+        font-size: 0.9rem;
+    }
+
+    .market-stocks-container,
+    .live-bb-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5px;
+    }
+    .tab {
+      font-size: 9px;
+    }
+    .radio-group {
+      margin-top: 0px;
+      gap: 3px;
+    }
+    .markets-header-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .toggle-switch-container {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: row !important;
+    }
+    .tab-container {
+      display: flex;
+      justify-content: center;
+      margin-left: 10%;
+    }
+    .stock-box {
+      width: auto;
+    }
+    .radio-group input[type="radio"]:checked::before {
+      content: "";
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .radio-group input[type="radio"] {
+      width: 8px !important;
+    height: 8px !important;
+    }
+    .radio-group input[type="radio"]:checked[value="BULLISH"] {
+      border-color: green;
+      background-color: green;
+      transform: scale(1.2) !important; /* This increases the circle size only */
+    }
+    
+    .radio-group input[type="radio"]:checked[value="BEARISH"] {
+      border-color: red;
+      background-color: red;
+      transform: scale(1.2) !important; /* Enlarges only the radio button itself */
+    }
+    .radio-group label {
+      font-size: 10px;
+      font-weight: 600;
+    }
+    .live-checkbox {
+      width: 12px !important;
+    height: 12px !important;
+    }
+    .live-bb-container {
+      gap: 6px;
+      margin-bottom: 0px !important;
+    }
+    .live-stock-box {
+      width: 180px;
+    }
+    .market-submit-button {
+      margin-bottom: 250px;
+    }
+  }

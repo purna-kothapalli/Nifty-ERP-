@@ -1,0 +1,336 @@
+/* ===== Container Styling ===== */
+.users-info__container {
+  margin-top: 3%;
+  max-width: 100%;
+  padding: 15px 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(5, 5, 5, 0.1);
+}
+.users-info__title {
+  font-size: 24px;
+  color: #333;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* ===== Loading & Error Messages ===== */
+.users-info__loading,
+.users-info__error {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 20px;
+}
+.users-info__error {
+  color: #d9534f;
+  font-weight: bold;
+}
+
+/* ===== Table Wrapper ===== */
+/* Using overflow-x: auto on all screens so that sticky works */
+.users-info__table-wrapper {
+  overflow-x: visible;
+  border-radius: 10px;
+  width: 100%;
+}
+/* ===== Table Styling ===== */
+.users-info__table {
+  width: 78vw;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: visible;
+}
+@media (max-width: 768px) {
+  .users-info__table {
+    width: 100%;
+  }
+  .users-info__table-wrapper {
+    overflow-x: auto;
+  }
+}
+
+/* ===== Table Header ===== */
+.users-info__table thead {
+  background: #333;
+  color: white;
+}
+.users-info__table thead th {
+  padding: 12px;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+/* Fix the first header (Name) column */
+.users-info__table thead th:first-child {
+  position: sticky;
+  left: 0;
+  background: #333;
+  z-index: 2;
+}
+
+/* ===== Table Rows ===== */
+.users-info__row td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 13px;
+  color: #333;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  font-weight: 500;
+}
+/* Fix the Name column in table body */
+
+
+/* ===== Alternating Row Colors ===== */
+.users-info__row:nth-child(odd) {
+  background: #f2f2f2;
+}
+
+/* ===== Hover Effect ===== */
+.users-info__row:hover {
+  background: #e0e0e0;
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+  transform: scale(1.01);
+}
+
+/* ===== Active Status Styling ===== */
+.users-info__status {
+  font-size: 17px;
+  font-weight: bold;
+  color: green;
+  cursor: pointer;
+}
+.users-info__status.inactive {
+  color: red;
+}
+
+/* ===== Search Box ===== */
+.users-search-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid #000;
+  border-radius: 8px;
+  padding: 5px;
+  margin-bottom: 15px;
+  width: 100%;
+  max-width: 400px;
+}
+.users-search-box i {
+  color: #000;
+  padding-left: 10px;
+}
+.users-search-input {
+  background-color: transparent;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  padding: 0.3rem;
+  height: 35px;
+  width: 100%;
+  min-width: 300px;
+  color: #000;
+}
+.users-search-input[type="date"]::-webkit-calendar-picker-indicator {
+  margin-right: 170px !important;
+  padding: 0;
+  position: relative;
+  right: 0px; /* tweak this value to move the icon left or right */
+  cursor: pointer;
+}
+
+
+.users-info__table td.users-info__name {
+  text-align: left;
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* Ensure it remains a table-cell so sticky works */
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  cursor: pointer;
+}
+/* ===== Search Wrapper ===== */
+/* Default layout: side-by-side */
+.users-search-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap; 
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* For small screens: stack vertically (date below search) */
+@media (max-width: 768px) {
+  .users-search-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    
+  }
+  .users-search-input[type="date"]::-webkit-calendar-picker-indicator {
+    margin-right: 0px !important;
+  padding: 0;
+  position: relative;
+  right: 0px; /* tweak this value to move the icon left or right */
+  cursor: pointer;
+  }
+}
+
+/* ===== Top Container Layout ===== */
+.top-container {
+  display: flex;
+  flex-wrap: nowrap; /* Force items to stay in one line */
+  justify-content: space-between;
+  align-items: center;
+}
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+  .users-info__container {
+    padding: 10px;
+  }
+  .users-info__table th,
+  .users-info__table td {
+    padding: 8px;
+    font-size: 10px;
+    white-space: nowrap;
+  }
+  .users-search-box {
+    width: 80%;
+    max-width: none;
+    padding: 2%;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+  .users-search-input {
+    height: 30px;
+    font-size: 14px;
+    min-width: 200px;
+  }
+  .top-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .users-info__table td.users-info__name {
+    text-align: left;
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: sticky;
+    left: 0;
+    background: #f2f2f2;
+    z-index: 1;
+    cursor: pointer;
+}
+  
+}
+@media (max-width: 480px) {
+  .users-info__title {
+    font-size: 15px;
+  }
+  .users-info__table {
+    font-size: 8px;
+  }
+  .users-search-box {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .users-search-input {
+    width: 80%;
+  }
+  .pagination-container button {
+    font-size: 10px;
+    font-weight: bold;
+  }
+ .users-info__container{
+  margin-bottom: 200px;
+
+  }
+}
+
+/* ===== Pagination Container ===== */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 8px;
+}
+.pagination-container button {
+  background-color: #4d4d4d;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+.pagination-container button:hover {
+  background-color: #000;
+}
+.pagination-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.pagination-container span {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* ===== Loading and Error Styles ===== */
+.users-info__loading,
+.users-info__error {
+  width: 78vw;        /* Match your table width */
+  margin: 0 auto;     /* Center horizontally */
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 15px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.users-info__loading {
+  color: #4d4d4d;
+  background: rgba(23, 23, 24, 0.1);
+}
+.users-info__error {
+  color: #ff4d4d;
+  background: rgba(255, 77, 77, 0.1);
+}
+
+/* ===== Sort Arrows ===== */
+.sort-arrows {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+  vertical-align: middle;
+  color: white;
+}
+.arrow {
+  font-size: 1px;
+  line-height: 1;
+  opacity: 0.3;
+  transition: opacity 0.2s ease-in-out;
+}
+.arrow.up {
+  margin-top: -10px;
+  margin-bottom: 1px;
+}
+.arrow.down {
+  margin-top: 1px;
+}
+.arrow.active {
+  opacity: 1;
+  font-weight: bold;
+}

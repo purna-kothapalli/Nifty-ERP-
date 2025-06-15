@@ -1,0 +1,62 @@
+.sms-form-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 24px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.sms-form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.sms-form-container form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #555;
+}
+
+.sms-form-container form input,
+.sms-form-container form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: border 0.3s;
+}
+
+.sms-form-container form input:focus,
+.sms-form-container form textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.sms-form-container button {
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.sms-form-container button:hover {
+  background-color: #0056b3;
+}
+
+.sms-form-container p {
+  margin-top: 16px;
+  font-weight: 500;
+  text-align: center;
+  color: #333;
+}

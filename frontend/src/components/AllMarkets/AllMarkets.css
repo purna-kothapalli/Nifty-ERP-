@@ -1,0 +1,637 @@
+.all-cards-container {
+  font-weight: 400;
+  font-family: roboto;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+/* Ensure buttons are properly spaced */
+.swal2-actions {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 10px !important;
+}
+
+/* Remove outline/border from buttons */
+.swal2-confirm, .swal2-cancel {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Improve button styling */
+.swal2-confirm {
+  background-color: #28a745 !important; /* Green */
+  color: white !important;
+  padding: 8px 16px !important;
+  font-size: 16px !important;
+  border-radius: 6px !important;
+}
+
+.swal2-cancel {
+  background-color: #dc3545 !important; /* Red */
+  color: white !important;
+  padding: 8px 16px !important;
+  font-size: 16px !important;
+  border-radius: 6px !important;
+}
+
+/* Fix hover effects */
+.swal2-confirm:hover {
+  background-color: #218838 !important;
+}
+
+.swal2-cancel:hover {
+  background-color: #c82333 !important;
+}
+
+
+.all-card {
+  color: #333;
+  font-weight: 600;
+  text-align: center;
+  font-size: 1.2rem;
+  border-radius: 12px;
+  margin: 10px 0px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 265px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+.all-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.all-card h2 {
+  margin-top: 30px;
+  color: #666;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: left;
+}
+
+
+.all-time-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 0px;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+
+.all-time-left {
+  text-align: center;
+  font-size: 10px;
+  margin-right: 10px;
+}
+.all-time-right {
+  text-align: center;
+  font-size: 10px;
+  margin-left: 10px;
+}
+
+.all-timer-line {
+  width: 2px;
+  height: 25px;
+  background-color: transparent;
+  border-left: 2px dashed #4f4f4f;
+}
+
+
+.all-card-icon {
+  position: absolute;
+  top: -15px;
+  left: 15px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  color: white;
+}
+
+/* .bullish {
+  background: linear-gradient(135deg, #B2F2BB, #8EE4AF);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.bearish {
+  background: linear-gradient(135deg, #FFB3B3, #FF6F61);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nifty-prediction {
+  background: linear-gradient(135deg, #A7C7E7, #74A9D8);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.bank-nifty-prediction {
+  background: linear-gradient(135deg, #FFD8A8, #FFAD60);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+} */
+
+
+.all-floating-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 8px 13px;
+}
+
+.all-des {
+  color: #777;
+  font-size: 16px;
+}
+
+.all-time {
+  font-weight: bold;
+  color: #333;
+  margin-top: 5px;
+  font-size: 18px;
+}
+
+.all-icon {
+  width: 2.5rem;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.market-card {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+
+.all-card > .Bullish {
+  background: linear-gradient(135deg, #B2F2BB, #8EE4AF);
+}
+
+.all-card > .Bearish {
+  background: linear-gradient(135deg, #FFB3B3, #FF6F61);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.all-card > .Nifty {
+  background: linear-gradient(135deg, #A7C7E7, #74A9D8);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.all-card > .Bank {
+  background: linear-gradient(135deg, #FFD8A8, #FFAD60);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.all-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+
+
+
+
+
+/* Dashboard Container */
+.markets-table-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  align-items: flex-start;
+  margin-top: 20px;
+  position: relative;
+  width: 90%;
+}
+.markets-table-container > .Bullish {
+  background: linear-gradient(135deg, #B2F2BB, #8EE4AF);
+}
+
+.markets-table-container > .Bearish {
+  background: linear-gradient(135deg, #FFB3B3, #FF6F61);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.markets-table-container > .Nifty {
+  background: linear-gradient(135deg, #A7C7E7, #74A9D8);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.markets-table-container > .Bank {
+  background: linear-gradient(135deg, #FFD8A8, #FFAD60);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.markets-table-container {
+  padding-top: 0px !important;
+  overflow: visible !important;
+} 
+
+.popup-heading {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  padding: 15px 0;
+  width: 75%;
+  border-radius: 10px 10px;
+  background: #999;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: -20px; /* Adjust as needed */
+  left: 20px;
+  z-index: 1;
+  display: flex;
+  padding-left: 20px;
+}
+
+/* Popup Heading */
+/* .popup-heading {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  padding: 15px 0;
+  width: 73%;
+  border-radius: 10px 10px;
+  background: #999;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: -18px;
+  left: 20px;
+  z-index: 1;
+  display: flex;
+  padding-left: 20px;
+} */
+
+
+/* Table Styling */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.admin-table th, .admin-table td {
+  padding: 14px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.admin-table th {
+  font-size: 16px;
+  font-weight: bold;
+  border-bottom: 2px solid #ddd;
+  background: #f7f7f7;
+}
+
+.admin-table tbody tr {
+  transition: all 0.3s ease-in-out;
+}
+
+.admin-table tbody tr:hover {
+  background: #f2f2f2;
+  transform: scale(1.01);
+}
+.row-active {
+  background: #ddd;
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+  .table-container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .popup-heading {
+    width: 95%;
+    font-size: 20px;
+  }
+
+  .admin-table th, .admin-table td {
+    padding: 10px;
+    font-size: 10px;
+  }
+}
+.table-container1 {
+  width: 90%;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 0;
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 250px;
+}
+
+/* Cute Loading Message */
+.loading-message {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ff9800;
+  background: rgba(255, 152, 0, 0.15);
+  border: 3px dashed #ff9800;
+  border-radius: 12px;
+  padding: 10px 20px;
+  text-align: center;
+  min-width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  animation: fadeIn 0.5s ease-in-out, pulse 1.5s infinite alternate;
+}
+
+/* Loading Icon */
+.loading-message::before {
+  content: "⏳";
+  font-size: 25px;
+  animation: spin 1.2s linear infinite;
+}
+
+/* Cute Error Message */
+.error-msg {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ff3d00;
+  background: rgba(255, 61, 0, 0.15);
+  border: 3px dashed #ff3d00;
+  border-radius: 12px;
+  padding: 10px 20px;
+  text-align: center;
+  min-width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  animation: fadeIn 0.5s ease-in-out, shake 1.5s infinite alternate;
+}
+
+/* Error Icon */
+.error-msg::before {
+  content: "❌";
+  font-size: 25px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes shake {
+  from {
+    transform: translateX(-3px);
+  }
+  to {
+    transform: translateX(3px);
+  }
+}
+
+.market-table-status {
+  font-weight: bold;
+  text-align: center;
+  font-size: 14px;
+}
+
+.status-active {
+  color: #28a745; /* Green color */
+}
+
+.markets-table-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1150px !important;
+}
+.admin-table > tbody > tr > td {
+  cursor: pointer;
+}
+.swal2-popup .btn-success {
+  background-color: #28a745 !important; /* Green */
+  color: white !important;
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+
+.swal2-popup .btn-danger {
+  background-color: #dc3545 !important; /* Red */
+  color: white !important;
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+
+.all-card {
+  color: #333;
+  font-weight: 600;
+  text-align: center;
+  font-size: 1.2rem;
+  border-radius: 12px;
+  margin: 10px 0px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 265px;
+  background: rgba(255, 255, 255, 0.9); /* Slight translucency */
+  border-radius: 12px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+
+  /* ✨ Subtle background pattern & gradient */
+  background-image: 
+    linear-gradient(135deg, rgba(200, 200, 200, 0.05) 25%, transparent 0),
+    radial-gradient(circle at top right, rgba(0, 0, 0, 0.03) 10%, transparent 30%),
+    url('https://www.transparenttextures.com/patterns/cubes.png'); /* Subtle cube pattern */
+  background-size: 100% 100%, cover, 120px 120px; 
+}
+
+.all-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Card title */
+.all-card h2 {
+  margin-top: 30px;
+  color: #444;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: left;
+}
+
+/* Data container */
+.all-time-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 0px;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.all-time-left, .all-time-right {
+  text-align: center;
+  font-size: 10px;
+  margin: 0 10px;
+}
+
+/* Vertical line */
+.all-timer-line {
+  width: 2px;
+  height: 25px;
+  border-left: 2px dashed #4f4f4f;
+}
+
+/* Card Icon */
+.all-card-icon {
+  position: absolute;
+  top: -15px;
+  left: 15px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  color: white;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+}
+@media screen and (max-width: 768px) {
+  .markets-table-container {
+    overflow-x: auto;
+  }
+
+  .admin-table {
+    width: 90%;
+    font-size: 14px;
+  }
+
+  .all-card {
+    width: 350px;
+    max-width: 95vw;
+  }
+
+  .all-floating-button {
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+  }
+
+  /* .popup-heading {
+    font-size: 15px;
+    text-align: center;
+    padding: 10px 0 !important;
+    z-index: 1 !important;
+    border-radius: 10px 10px;
+    position: absolute;
+    display: flex;
+    top:-18px
+  } */
+  .popup-heading {
+    font-size: 18px;
+    text-align: center;
+    padding: 12px 16px;
+    width: calc(100% - 40px); /* Dynamically adjusts width */
+    left: 20px; /* Same as padding/margin on container */
+    top: -10px;
+    border-radius: 10px 10px;
+    background: #999;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    z-index: 1;
+    display: flex;
+  }
+  
+  /* Make first column sticky */
+.admin-table th:first-child,
+.admin-table td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* subtle shadow */
+}
+.markets-table-container {
+  display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 250px !important;
+}
+
+.table-container, 
+.piechart-container {
+  width: 100% !important;
+  max-width: 90vw;
+  margin-left: -20px !important;
+}
+.table-and-chart-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+}

@@ -1,0 +1,551 @@
+/* 1) Container for the entire form */
+.uni-bid-form-container1 {
+  width: 90% !important;
+  margin: 30px 100px;
+margin-left: 50px !important;
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  min-height: auto;
+  height: auto;
+}
+@media (max-width: 1024px) {
+  .uni-bid-form-container1 {
+    width: 80%;
+  }
+}
+@media (max-width: 768px) {
+  .uni-bid-form-container1 {
+    width: 90%;
+    padding: 15px;
+    margin-left: 10px;
+    margin-right: 100px;
+  }
+}
+.uni-form-heading1{
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #fff;
+  background-color: #333;
+  padding: 2%;
+  border-radius: 10px;
+  text-align: center;
+}
+.uni-response-message {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #007bff;
+  font-weight: 500;
+}
+/* 3) Grid layout for form fields */
+.uni-bid-form-grid1{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+/* Responsive: Single column on smaller screens */
+@media (max-width: 768px) {
+  .uni-bid-form-grid1{
+    grid-template-columns: 1fr;
+  }
+}
+/* 4) Form group styling */
+.uni-form-group1{
+  display: flex;
+  flex-direction: column;
+}
+
+/* 5) Labels and Inputs */
+.uni-form-group1 label{
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.uni-form-group1 input,
+.uni-form-group1 select{
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  width: auto;
+}
+
+/* 6) Error Text */
+.uni-error-text {
+  color: #e63946;
+  font-size: 13px;
+  margin-top: 3px;
+}
+
+/* 8) Prize Breakdown */
+.uni-section-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.uni-prize-breakdown-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+
+.uni-prize-breakdown-table th,
+.uni-prize-breakdown-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.uni-prize-breakdown-table th {
+  background-color: #f4f4f4;
+}
+
+/* 9) Buttons */
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+/* Center buttons on smaller screens */
+.uni-submit-button1{
+  display: flex;
+  justify-content: center;
+  margin: 10px auto;
+}
+
+.uni-add-row-button {
+  background-color: #1a1818;
+  color: #fff;
+  padding: 8px 16px;
+}
+
+.uni-add-row-button:hover {
+  background-color: #343435;
+}
+
+.uni-remove-button1 {
+  font-size: 14px;
+  height: 40px !important;
+  width: 130px !important;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #1a1818;
+}
+
+.uni-remove-button1:hover {
+  background-color: #171717;
+}
+
+.uni-submit-button1{
+  background-color: #1a1818;
+  color: #fff;
+  padding: 10px 20px;
+  width: 130px !important;
+}
+
+.uni-submit-button1:hover {
+  background-color: #343435;
+}
+
+/* Responsive: Adjust button sizes for small screens */
+@media (max-width: 768px) {
+  .uni-submit-button1{
+    width: 100%;
+    text-align: center;
+  }
+
+  .uni-bid-form-container1 {
+    margin-bottom: 250px;
+  }
+}
+
+.company-radio-input {
+  width: 10px !important;
+  height: 10px !important;
+}
+
+/* Wrap everything in a main container if needed (optional) */
+.uni-main-container {
+  padding: 20px;
+  max-width: 1400px;
+  /* Adjust as desired */
+  margin: 0 100px;
+}
+
+/* Container specifically for the form */
+.uni-bid-form-container1 {
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  /* space below to separate from the table container */
+  padding: 20px;
+}
+
+/* Heading at the top of the form */
+.uni-form-heading1{
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+/* The grid layout for the form fields */
+.uni-bid-form-grid1{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* 2 columns */
+  gap: 20px;
+  /* space between items */
+}
+
+/* Generic form group styling */
+.uni-form-group1{
+  display: flex;
+  flex-direction: column;
+}
+
+.uni-form-group1 label{
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.uni-form-group1 input[type="number"],
+.uni-form-group1 select,
+.uni-form-group1 input[type="text"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Error text styling */
+.uni-error-text {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+
+
+/* Section headings (for Prize Breakdown, All Bids, etc.) */
+.uni-section-title1 {
+  margin: 20px 0 10px 0;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+
+/* Prize Breakdown table */
+.uni-prize-breakdown-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.uni-prize-breakdown-table th,
+.uni-prize-breakdown-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+
+/* Buttons for adding/removing prize levels */
+.uni-add-row-button {
+  margin-top: 8px;
+  background-color: #313030;
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.uni-add-row-button:hover,
+.uni-remove-button1:hover {
+  background-color: #343435;
+}
+
+/* Submit button container at the bottom of the form */
+.uni-submit-container {
+  grid-column: 1 / span 2;
+  display: flex;
+  flex-direction: row;
+  justify-content: center; /* or flex-end if you want them right aligned */
+  gap: 20px;
+  margin-top: 20px;
+}
+
+
+.uni-submit-button1{
+  color: #fff;
+  font-size: 1rem;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+display: flex;
+align-self: flex-end;
+margin-right: 10px;
+}
+
+.uni-submit-button1:hover {
+  background-color: #232324;
+}
+
+/* Container specifically for the bids table */
+.bids-table-container {
+  max-height: auto;
+  /* Set a fixed height to enable internal scrolling */
+  overflow-y: auto;
+  /* Enable vertical scrolling only when content exceeds the height */
+  padding: 16px;
+  /* Optional: add some padding */
+  background-color: #fff;
+  /* Optional: border for better visual separation */
+  border-radius: 4px;
+  /* Optional: rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Optional: shadow for depth */
+}
+
+/* .uni-bids-table th {
+  position: sticky;
+  top: 0;
+  background-color: #f9f9f9;
+  z-index: 1;
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+} */
+/* Bids table styling */
+.uni-bids-table1 {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.uni-bids-table1 th,
+.uni-bids-table1 td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.bids-table-container {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  overflow-x: auto;
+}
+
+/* Bids Table */
+.uni-bids-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 12px;
+  /* space between rows */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+}
+
+.uni-bids-table thead tr {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+.uni-bids-table thead th {
+  text-align: center;
+  padding: 12px 16px;
+  border-bottom: 2px solid #eee;
+}
+
+.uni-bids-table tbody tr {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease-in-out;
+}
+
+.uni-bids-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.uni-bids-table td {
+  padding: 14px 16px;
+  vertical-align: middle;
+  border-bottom: 1px solid #f0f0f0;
+  text-align: center !important;
+}
+
+.uni-bids-table td:last-child {
+  text-align: center;
+}
+/* Two columns on desktop, single column on tablets and below */
+.uni-bid-form-grid1 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+@media (max-width: 768px) {
+  .uni-bid-form-grid1 {
+    grid-template-columns: 1fr;
+  }
+}
+/* Center main container and allow it to scale */
+
+
+/* Form container spans full width on mobile, fixed max-width on larger screens */
+.uni-bid-form-container1 {
+  width: 100%;
+  max-width: 800px;
+  margin: 30px 0;
+  Margin-left: -10px ;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+/* Always allow horizontal scroll */
+.bids-table-container {
+  overflow-x: auto;
+}
+.uni-bid-form-container1 {
+  max-width: 800px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.uni-form-heading1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.uni-bid-form-grid1 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.uni-form-group1 {
+  display: flex;
+  flex-direction: column;
+}
+
+.uni-form-group1 label {
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.uni-form-group1 input,
+.uni-form-group1 select {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.uni-error-text {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.uni-submit-container {
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.uni-submit-button1,
+.uni-remove-button1 {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.uni-submit-button1 {
+  background-color: #3a3a3b;
+  color: #fff;
+}
+
+.uni-submit-button1:hover {
+  background-color: #1a1a1a;
+}
+
+.uni-remove-button1 {
+  background-color: #302f2f;
+  color: #fff;
+  margin-right: 10px;
+}
+
+.uni-remove-button1:hover {
+  background-color: #161515;
+}
+
+/* 🔄 Responsive for smaller screens */
+@media (max-width: 768px) {
+  .uni-bid-form-grid1 {
+    grid-template-columns: 1fr;
+  }
+
+  .uni-submit-container {
+    grid-column: 1 / -1 !important;
+    flex-direction: column !important;
+    gap: 10px;
+  }
+
+  .uni-remove-button1,
+  .uni-submit-button1 {
+    width: 100%;
+  
+  }
+  .uni-submit-button1 {
+    margin-right:60px !important;
+  }
+}
+
+/* Mobile: convert table into block cards */
+@media (max-width: 600px) {
+  .uni-bids-table thead {
+    display: none;
+  }
+  .uni-bids-table tbody tr {
+    display: block;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .uni-bids-table tbody td {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border: none;
+  }
+  .uni-bids-table tbody td::before {
+    content: attr(data-label) ":";
+    font-weight: 600;
+    margin-right: 8px;
+  }
+  .uni-main-container {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+    margin-bottom: 250px;
+  }
+ .uni-bid-form-container1{
+  Margin-left: -100px;
+  }
+}

@@ -1,0 +1,175 @@
+.error {
+  color: red;
+  margin-top: 10px;
+}
+.holiday-form-container{
+  width: 60%;
+  margin: 30px 200px;
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  min-height: 100vh;
+  height: auto;
+}
+.holiday-btn-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+}
+.uni-form-heading{
+  width: 100%   ;
+}
+.holiday-submit-button {
+  width: auto;
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  font-size: 16px;
+}
+
+.holiday-config-table {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+  height: 500px;
+  overflow: hidden;
+}
+
+.holiday-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.holiday-table {
+  display: block;
+  width: 100%;
+  max-height: 450px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  min-height: 450px;
+}
+
+.holiday-table tbody {
+  display: block;
+  width: 100%;
+  min-height: 400px;
+}
+
+.holiday-table tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.holiday-table thead {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 2;
+}
+
+.sort-options {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.sort-options select {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
+}
+.holiday-list-header{
+  width: 100%;
+}
+.uni-holiday-list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+}
+.holiday-conif{
+  width: 60%;
+}
+/* Responsive Styling */
+@media (max-width: 1024px) {
+  .holiday-conif{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 550px;
+    justify-content: flex-start;
+    margin: 0px;
+    min-height: 100vh;
+    height: auto;
+    /* height: 140vh !important; */
+  }
+  .holiday-btn-container {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .holiday-submit-button {
+    width: 100%;
+  }
+  .table-container {
+    height: auto;
+    min-width: 350px;
+  }
+  .uni-holiday-list {
+    margin-bottom: 12.5rem;
+  }
+
+  .sort-options {
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .uni-bid-form-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .uni-form-group {
+    width: 100%;
+  }
+
+  .holiday-table tbody {
+    min-height: auto;
+  }
+
+  .sort-options {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+  .holiday-submit-button {
+    width: auto;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    font-size: 16px;
+  } 
+}
+
+@media (max-width: 480px) {
+  .holiday-config-table {
+    height: auto;
+  }
+
+  .holiday-table {
+    max-height: 300px;
+  }
+
+  .holiday-btn-container {
+    align-items: center;
+  }
+}

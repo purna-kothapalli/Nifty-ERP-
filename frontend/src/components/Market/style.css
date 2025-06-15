@@ -1,0 +1,131 @@
+.cards-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 20px;
+  font-weight: 400;
+  font-family: roboto;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 135.6px;
+  width: 400px;
+  cursor: pointer;
+  max-width: 100%;
+  padding: 10px 20px;
+  border-radius: 14px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card h2 {
+  margin: 0;
+  color: #3f3f3f;
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.time-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.time-left {
+  text-align: center;
+  font-size: 14px;
+  margin-right: 15px;
+}
+.time-right {
+  text-align: center;
+  font-size: 14px;
+  margin-left: 15px;
+}
+
+.timer-line {
+  width: 2px;
+  height: 35px;
+  background-color: transparent;
+  border-left: 2px dashed #4f4f4f;
+}
+
+
+.card-icon {
+  font-size: 30px;
+  margin-top: 10px;
+  padding-top: 20px;
+}
+
+.bullish {
+  background: linear-gradient(135deg, #B2F2BB, #8EE4AF);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.bearish {
+  background: linear-gradient(135deg, #FFB3B3, #FF6F61);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nifty-prediction {
+  background: linear-gradient(135deg, #A7C7E7, #74A9D8);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.bank-nifty-prediction {
+  background: linear-gradient(135deg, #FFD8A8, #FFAD60);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.floating-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: black;
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 8px 13px;
+}
+
+.des {
+  font-size: 12px;
+}
+.time {
+  margin-top: 5px;
+}
+
+.icon {
+  width: 5rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.market-card {
+  animation: fadeIn 0.8s ease-in-out;
+}

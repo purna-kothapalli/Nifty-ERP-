@@ -1,0 +1,509 @@
+/* PaymentHistory.css */
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f9f9fb;
+    margin: 0;
+    padding: 0;
+  }
+
+  .payment-bg-container {
+    gap: 2rem;
+    background-color: #f9f9fb;
+    margin: 10px 25px;
+  }
+
+  .payment-back-btn {
+    margin-left: 25px;
+    margin-bottom: 0px;
+    margin-top: 15px;
+  }
+  
+  .payment-container {
+    display: flex;
+    padding: 2rem;
+    gap: 2rem;
+  }
+  
+  .left-section {
+    flex: 2;
+  }
+  
+  .right-section {
+    flex: 1;
+  }
+  
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  
+  .breadcrumb {
+    color: #999;
+    margin-bottom: 1rem;
+  }
+  
+  .breadcrumb .active {
+    color: #5a5a5a;
+    font-weight: 500;
+  }
+  
+  .top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  
+  .search-input {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 50%;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .btns {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .report-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #555;
+    border: 1px solid #ccc;
+    background: #fff;
+    padding: 8px 8px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 10px   ;
+  }
+
+  .report-btn:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .black-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: black;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+  }
+  
+  .search-icons {
+    display: flex;
+    gap: 10px;
+    margin-left: 10px;
+  }
+  
+  .calendar-icon,
+  .filter-icon {
+    font-size: 18px;
+    color: #555;
+    cursor: pointer;
+  }
+  
+  .order-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  .order-table th, .order-table td {
+    padding: 15px;
+    text-align: left;
+    font-size: 14px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .order-table th {
+    color: #888;
+  }
+  
+  .icon {
+    color: #7e22ce;
+    margin-right: 8px;
+    font-size: 18px;
+  }
+  
+  .code {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #888;
+    margin-top: 4px;
+  }
+  
+  .pending {
+    color: #f59e0b;
+    background-color: #fef3c7;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-top: 10px;
+    font-size: 12px;
+    display: inline-block;
+  }
+  
+  .success {
+    color: #10b981;
+    background-color: #d1fae5;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-top: 10px;
+    font-size: 12px;
+    display: inline-block;
+  }
+  
+  .selected-row {
+    background-color: #f3f4f6;
+  }
+  
+  
+  .details-card {
+    background: white;
+    /* margin-top: 28%; */
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 0 10px #ddd;
+    font-size: 14px;
+  }
+  
+  .details-card .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  
+  .details-card .header span {
+    font-weight: 600;
+  }
+  
+  .details-card .section {
+    margin-bottom: 1.5rem;
+    width: 350px;
+  }
+  
+  .details-card h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #111;
+  }
+  
+  .details-card p {
+    margin: 6px 0;
+    font-size: 14px;
+    color: #444;
+  }
+  
+  .details-card .code {
+    color: #7e22ce;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  
+  .details-card .gray {
+    color: #999;
+    font-size: 13px;
+  }
+  
+  .details-card .timeline {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .timeline li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #444;
+    font-weight: 600;
+  }
+  
+  .timeline-text {
+    font-weight: 800;
+    color: #999;
+
+  }
+
+  .timeline .dot {
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 8px;
+    height: 8px;
+    background: #999;
+    border-radius: 50%;
+  }
+  
+  .timeline .purple-dot {
+    background: #7e22ce;
+  }
+  
+  .visa {
+    color: #2563eb;
+    margin-left: 5px;
+  }
+  
+  .total {
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+  .transaction-details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  .transaction-details h4 {
+    font-size: 12px;
+    color: #333;
+    font-weight: 700;
+  }
+
+.horizontalLine {
+    border: none;
+    border-top: 2px solid #6f6f6f;
+    margin: 10px 0;
+}
+
+.transaction-sub-heading {
+    font-size: 14px;
+    color: #666;
+    font-weight: 700;
+    margin: 15px auto;
+}
+
+.transaction-user {
+  color: #333;
+}
+
+.amount {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.transaction-id {
+  font-size: 10px !important;
+}
+
+.copy-icon {
+  cursor: pointer;
+  color: gray;
+  font-size: 12px;
+  margin-right: 5px;
+  transition: color 0.3s;
+}
+
+.copy-icon:hover {
+  color: #7e22ce;
+}
+
+/* Popup Styles */
+.popup {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 16px;
+  opacity: 0;
+  animation: popup-animation 1.5s forwards;
+}
+
+@keyframes popup-animation {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 30px);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -10px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -30px);
+  }
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pages span {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  background: #eee;
+  cursor: pointer;
+}
+
+.pages .active-page {
+  background: #000;
+  color: white;
+}
+
+.credit {
+  color: green;
+  font-weight: 600;
+}
+
+.debit {
+  color: red;
+  font-weight: 600;
+}
+.pagination-arrow {
+  cursor: pointer;
+  color: black;
+  text-align: center;
+}
+
+.filter-dropdown {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 15px;
+  z-index: 100;
+  border-radius: 5px;
+  width: 200px;
+}
+
+.calendar-dropdown {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  padding: 15px;
+  z-index: 100;
+  border-radius: 5px;
+  width: 200px;
+}
+
+.filter-section {
+  margin-bottom: 10px;
+}
+
+.apply-filter-btn {
+  background-color: black;
+  color: white;
+  padding: 6px 10px;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.date-filter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 15px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.date-filter-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #333;
+  margin-right: 10px;
+}
+
+.date-filter-input {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #555;
+  font-weight: 700;
+  background-color: #f9f9f9;
+}
+
+/* Loading container styles */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 100vh; /* Use full viewport height */
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+  position: absolute; /* Center the content on the page */
+  top: 0;
+  left: 0;
+}
+
+/* Loading text styles */
+.loading-user-data {
+  font-size: 1.5em;
+  display: inline-block;
+  font-weight: bold;
+  color: #202020; /* You can change this color */
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  position: relative;
+  animation: fadeIn 2s ease-in-out; /* Pulse and fade-in effect */
+}
+
+
+/* Fade-in effect for smooth appearance */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Create the animated dots */
+.loading-user-data:after {
+  content: '...';
+  animation: dots 1.5s infinite steps(5, end);
+}
+
+/* Dot animation */
+@keyframes dots {
+  0%, 20% {
+    content: '.';
+  }
+  40% {
+    content: '..';
+  }
+  60% {
+    content: '...';
+  }
+  80% {
+    content: '....';
+  }
+  100% {
+    content: '.....';
+  }
+}

@@ -1,0 +1,304 @@
+/* Wrapper */
+.user-bids-wrapper {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+  width: 80%;
+  margin-left: 20px;
+}
+
+/* Title */
+.user-bids-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+/* Tabs */
+.user-bids-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.user-bids-tab {
+  padding: 10px 24px;
+  background-color: #9f9f9f;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.user-bids-tab.active {
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 123, 255, 0.3);
+}
+
+.user-bids-tab.active.bullish-active {
+  background-color: #28a745;
+}
+
+.user-bids-tab.active.bearish-active {
+  background-color: #dc3545;
+}
+
+
+/* User section */
+.user-bids-user-card {
+  margin-bottom: 40px;
+  border-top: 2px solid #ddd;
+  padding-top: 24px;
+}
+
+.user-bids-username {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #222;
+}
+
+.user-bids-bid-count {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 18px;
+}
+
+/* Cards grid */
+.user-bids-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+/* Bid Card */
+.user-bids-card {
+  background-color: #fdfdfd;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 16px;
+  transition: box-shadow 0.3s ease;
+}
+
+.user-bids-card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Header */
+.user-bids-card-header {
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.user-bids-info-icon {
+  font-size: 18px;
+  color: #0d0d0e;
+  cursor: pointer;
+}
+
+/* Bid Details */
+.user-bids-details p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #444;
+}
+
+.user-bids-details strong {
+  font-weight: 600;
+  color: #222;
+}
+
+.user-bids-free {
+  color: green;
+  font-weight: 600;
+}
+
+/* Company Tags */
+.user-bids-companies {
+  margin-top: 12px;
+}
+
+.user-bids-company-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.user-bids-company-tag {
+  padding: 4px 10px;
+  background-color: #f1efef;
+  border-radius: 20px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #333;
+}
+
+.user-bids-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* Status Colors */
+.bullish-dot {
+  background-color: green;
+}
+
+.bearish-dot {
+  background-color: red;
+}
+
+.big-bull-tag {
+  background: linear-gradient(135deg, #B2F2BB, #8EE4AF);
+}
+
+.big-bear-tag {
+  background: linear-gradient(135deg, #FFB3B3, #FF6F61);
+}
+
+/* Loading */
+.user-bids-loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+
+.user-bids-loading-text {
+  font-size: 18px;
+  color: #444;
+}
+
+/* Responsive Fixes */
+@media (max-width: 600px) {
+  .user-bids-tab {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .user-bids-title {
+    font-size: 20px;
+  }
+
+  .user-bids-username {
+    font-size: 18px;
+  }
+}
+
+ .user-bids-filter-container {
+  display: flex;
+  justify-content: flex-end;
+  height: 150px;
+  padding-right: 20px;
+  position: relative;
+  height: fit-content;
+}
+
+.user-bids-filter-toggle {
+  background-color: #222;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.user-bids-filter-toggle:hover {
+  background-color: #6f6f6f;
+}
+
+.user-bids-filter-dropdown {
+  top: 10%;
+  right: 25%;
+  z-index: 100;
+} 
+.user-bids-filter-dropdown label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.user-bids-filter-dropdown select,
+.user-bids-filter-dropdown input[type="checkbox"] {
+  font-size: 14px;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.user-bids-filter-dropdown select:focus {
+  border-color: #222;
+}
+
+.user-bids-details p {
+  font-family: sans-serif;
+}
+
+.user-bids-details p span {
+  font-family: sans-serif;
+}
+
+.filter-modal {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  width: 300px;
+  max-width: 90%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  margin-right: 15%;
+  margin-bottom: 20px;
+}
+
+.user-bids-filter-dropdown label,
+.user-bids-filter-dropdown select
+{
+  display: block;
+  margin: 10px 0;
+}
+
+.user-bids-filter-dropdown button {
+  margin-top: 5px;
+  padding: 6px 10px;
+  background-color: #222;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.user-bids-filter-dropdown button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.company-select {
+  background-color: #8f8f8f;
+  color: #fff;
+}
+
+.user-bids-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+}
+
+.user-bids-checkbox input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  margin-right: 5px;
+  accent-color: #6f6f6f; 
+}
