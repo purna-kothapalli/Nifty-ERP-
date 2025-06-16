@@ -59,7 +59,7 @@ const Results = () => {
   // Fetch Market Data
   const fetchMarketData = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/get/market");
+      const response = await axios.get("https://dev-erp.nifty10.in/get/market");
       setMarketData(response.data.data || []);
     } catch (error) {
       console.error("Error fetching market data:", error);
@@ -70,7 +70,7 @@ const Results = () => {
   // Fetch Companies Data
   const fetchCompaniesData = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/get/company");
+      const response = await axios.get("https://dev-erp.nifty10.in/get/company");
       const companies = response.data.data || [];
       const categorizedCompanies = {
         Bullish: 0,
@@ -101,7 +101,7 @@ const Results = () => {
 
   try {
     const requests = marketData.map(({ marketId }) =>
-      axios.get("http://localhost:4000/get/bidMarket", {
+      axios.get("https://dev-erp.nifty10.in/get/bidMarket", {
         params: {
           Date: formattedDate,
           marketId,

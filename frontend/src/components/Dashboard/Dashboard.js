@@ -119,7 +119,7 @@ const Dashboard = () => {
         const fetchUserData = async () => {
             try {
                 // --- USER STATS & REVENUE/SPENT CALCULATIONS ---
-                const userRes = await axios.get("http://localhost:4000/get/activeUser");
+                const userRes = await axios.get("https://dev-erp.nifty10.in/get/activeUser");
                 const users = userRes.data.data || [];
                 const customers = users.filter(u => u.userType === "CUSTOMER");
                 setTotalUsers(customers.length);
@@ -165,7 +165,7 @@ const Dashboard = () => {
 
                 // --- BIDS & SPENT & WINNERS for today ---
                 try {
-                    const response = await axios.get("http://localhost:4000/user/metrics");
+                    const response = await axios.get("https://dev-erp.nifty10.in/user/metrics");
                     const { totalSpent, spentGrowth, totalWinningPoints } = response.data;
               
                     setTotalSpent(totalSpent || 0);

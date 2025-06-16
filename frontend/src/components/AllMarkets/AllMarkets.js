@@ -72,7 +72,7 @@ const AllMarkets = () => {
 
     for (const marketId of marketIds) {
       try {
-        const response = await axios.get("http://localhost:4000/get/bidMarket", {
+        const response = await axios.get("https://dev-erp.nifty10.in/get/bidMarket", {
           params: {
             Date: formattedDate,
             marketId: marketId,
@@ -113,7 +113,7 @@ const AllMarkets = () => {
   useEffect(() => {
     const fetchMarketData = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/get/market");
+        const response = await axios.get("https://dev-erp.nifty10.in/get/market");
         setMarketData(response.data.data || []);
       } catch (error) {
         console.error("Error fetching market data:", error);
@@ -176,7 +176,7 @@ const AllMarkets = () => {
       const formattedDate = getFormattedDate();
 
 
-      const response = await axios.get("http://localhost:4000/get/bidMarket", {
+      const response = await axios.get("https://dev-erp.nifty10.in/get/bidMarket", {
         params: {
           Date: formattedDate,
           marketId: marketId,
@@ -232,7 +232,7 @@ const AllMarkets = () => {
 
 
       const response = await axios.get(
-        `http://localhost:4000/get/bidMarket`,
+        `https://dev-erp.nifty10.in/get/bidMarket`,
         {
           params: {
             Date: formattedDate,
@@ -275,7 +275,7 @@ const AllMarkets = () => {
       const newStatus = !prevStatus;
 
       const response = await fetch(
-        `http://localhost:4000/change/status?dayWiseBidId=${id}&status=${newStatus}`,
+        `https://dev-erp.nifty10.in/change/status?dayWiseBidId=${id}&status=${newStatus}`,
         { method: "GET" }
       );
 

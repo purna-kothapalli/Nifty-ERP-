@@ -40,7 +40,7 @@ const Markets = ({ onSelectMarket }) => {
   useEffect(() => {
     const fetchMarketData = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/get/market");
+        const response = await axios.get("https://dev-erp.nifty10.in/get/market");
         setMarketData(response.data.data || []);
         setLoading(false);
       } catch (error) {

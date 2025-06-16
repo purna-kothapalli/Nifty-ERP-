@@ -8,7 +8,7 @@ const Otp = () => {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const inputRefs = useRef([]);
   const navigate = useNavigate();
-  const DEFAULT_OTP = "241003";
+  const DEFAULT_OTP = "841941";
 
   // Skip API; just check if user is authenticated and send dummy OTP
   useEffect(() => {

@@ -24,7 +24,7 @@ const DayPerformance = ({ trend, onBack, marketId }) => {
     const fetchStocks = async () => {
       setLoading(true);
       try {
-        const response = await fetch("http://localhost:4000/get/company");
+        const response = await fetch("https://dev-erp.nifty10.in/get/company");
         const data = await response.json();
         if (data?.data && Array.isArray(data.data)) {
           const filteredStocks = data.data.filter(
@@ -70,7 +70,7 @@ const DayPerformance = ({ trend, onBack, marketId }) => {
     };
   
     try {
-      const response = await fetch("http://localhost:4000/bids/submit-market-result", {
+      const response = await fetch("https://dev-erp.nifty10.in/bids/submit-market-result", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

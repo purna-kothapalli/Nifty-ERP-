@@ -76,7 +76,7 @@ const HomePage = () => {
   // ─── Fetch notifications/messages/announcements ────────────────────────
   const fetchNotifications = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/get/notifications");
+      const response = await axios.get("https://dev-erp.nifty10.in/get/notifications");
       const allData = response.data.data || [];
 
       const formatTS = (ts) => {
@@ -209,7 +209,7 @@ const HomePage = () => {
   const handleNewNotifSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:4000/api/notifications/new', {
+      const response = await fetch('https://dev-erp.nifty10.in/api/notifications/new', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newNotif),
@@ -242,7 +242,7 @@ const HomePage = () => {
     };
 
     try {
-      await axios.post("http://localhost:4000/post/notification", payload, {
+      await axios.post("https://dev-erp.nifty10.in/post/notification", payload, {
         headers: { "Content-Type": "application/json" },
       });
 
@@ -513,7 +513,7 @@ setIsMsgDropdownOpen(false);
                   {!isCollapsed && <span className="visible">Users Info</span>}
                 </Link>
               </li>
-              <li
+              {/* <li
                 onClick={() => setActiveTab("admin-settings")}
                 className={activeTab === "admin-settings" ? "active admin-settings" : "admin-settings"}
               >
@@ -521,7 +521,7 @@ setIsMsgDropdownOpen(false);
                   <i className="fa-solid fa-user-gear settings-icon"></i>
                   {!isCollapsed && <span className="visible">Admin</span>}
                 </Link>
-              </li>
+              </li> */}
               <li
                 onClick={() => setActiveTab("user-bids")}
                 className={activeTab === "user-bids" ? "active" : ""}

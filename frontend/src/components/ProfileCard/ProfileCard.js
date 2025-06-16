@@ -63,7 +63,7 @@ const [selectedUserInfo, setSelectedUserInfo] = useState(null);
       try {
         setLoading(true);
         setError(null);
-        const response = await fetch("http://localhost:4000/users/list");
+        const response = await fetch("https://dev-erp.nifty10.in/users/list");
         const data = await response.json();
 
         if (data?.content) {
@@ -96,7 +96,7 @@ const [selectedUserInfo, setSelectedUserInfo] = useState(null);
       try {
         setLoading(true);
         setError(null);
-        const url = new URL("http://localhost:4000/user/getUserById"); 
+        const url = new URL("https://dev-erp.nifty10.in/user/getUserById"); 
         url.searchParams.append("userId", userId); 
 
         const response = await fetch(url, {
@@ -120,7 +120,7 @@ const [selectedUserInfo, setSelectedUserInfo] = useState(null);
   // Fetch placed bids and calculate totals
 const fetchBids = async (userId) => {
   try {
-    const url = new URL("http://localhost:4000/user/bids");
+    const url = new URL("https://dev-erp.nifty10.in/user/bids");
     url.searchParams.append("userId", userId);  // Add userId as a query parameter dynamically
 
     const response = await fetch(url, {

@@ -157,7 +157,7 @@ const fetchTransactions = useCallback(async (startDate, endDate) => {
       return;
     }
 
-const response = await fetch("http://localhost:4000/user/transactions", {
+const response = await fetch("https://dev-erp.nifty10.in/user/transactions", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -187,7 +187,7 @@ const fetchUsers = useCallback(async () => {
     setError(null);
 
     // Make API request to the backend to get user data
-    const response = await fetch("http://localhost:4000/users/list");
+    const response = await fetch("https://dev-erp.nifty10.in/users/list");
     const data = await response.json();
 
     if (data?.content) {

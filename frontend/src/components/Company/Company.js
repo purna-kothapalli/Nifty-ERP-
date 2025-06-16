@@ -37,7 +37,7 @@ function Company() {
     // Fetch company list on component mount
     useEffect(() => {
         axios
-            .get("http://localhost:4000/get/company")
+            .get("https://dev-erp.nifty10.in/get/company")
             .then((response) => {
                 let fetchedStocks = response.data.data || [];
                 setStocks(fetchedStocks.sort((a, b) => a.companyName.localeCompare(b.companyName)));
@@ -140,7 +140,7 @@ function Company() {
             };
 
             const response = await axios.post(
-                "http://localhost:4000/company/update",
+                "https://dev-erp.nifty10.in/company/update",
                 payload,
                 { headers: { "accept": "application/json", "Content-Type": "application/json" } }
             );
@@ -190,7 +190,7 @@ function Company() {
             };
 
             const response = await axios.post(
-                "http://localhost:4000/company/create",
+                "https://dev-erp.nifty10.in/company/create",
                 payload,
                 { headers: { "Accept": "application/json", "Content-Type": "application/json" } }
             );

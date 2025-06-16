@@ -31,7 +31,7 @@ function MarketStatus() {
 
     useEffect(() => {
         axios
-            .get("http://localhost:4000/get/company")
+            .get("https://dev-erp.nifty10.in/get/company")
             .then((response) => {
                 setStocks(response.data.data || []);
             })
@@ -87,7 +87,7 @@ function MarketStatus() {
       
         try {
           const response = await axios.put(
-            "http://localhost:4000/company/bulk/update/company",
+            "https://dev-erp.nifty10.in/company/bulk/update/company",
             updatedStockData.map(({ companyId, companyStatus, liveBB }) => ({
               companyId,
               companyStatus,
@@ -142,7 +142,7 @@ function MarketStatus() {
         }));
       
         try {
-          await axios.post("http://localhost:4000/company/update/all", updatedStocks);
+          await axios.post("https://dev-erp.nifty10.in/company/update/all", updatedStocks);
       
           setStocks(updatedStocks);
           setPendingUpdates({});

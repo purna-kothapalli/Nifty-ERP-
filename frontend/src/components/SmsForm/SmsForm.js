@@ -16,7 +16,7 @@ const SmsForm = () => {
       .filter((num) => num.length > 0);
 
     try {
-      const res = await axios.post('http://localhost:4000/send-sms', {
+      const res = await axios.post('https://dev-erp.nifty10.in/send-sms', {
         numbers: numberList,
         message,
       });
