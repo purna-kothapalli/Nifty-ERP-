@@ -78,7 +78,7 @@
   }
   
   .sidebar-menu ul li {
-    padding: 4px 15px;
+    padding: 1.3px 15px;
     cursor: pointer;
     transition: background 0.3s;
   }
@@ -161,6 +161,8 @@
 
 .sidebar-menu .submenu li {
   cursor: pointer;
+  margin-top: 15px;
+  margin-bottom: -5px;
 }
 
 .sidebar-menu .has-submenu > .submenu-toggle {
@@ -582,7 +584,7 @@ main {
 }
 
 .sidebar-menu ul li {
-  padding: 8px 15px;
+  padding: 1.3px 15px;
   cursor: pointer;
   transition: background 0.3s;
 }
