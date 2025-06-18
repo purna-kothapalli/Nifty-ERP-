@@ -43,7 +43,7 @@ const handleUserClick = (user) => {
     try {
       setLoading(true);
       setError(null);
-      const response = await fetch("https://dev-erp.nifty10.in/users/list");
+      const response = await fetch("https://prod-erp.nifty10.in/users/list");
       const data = await response.json();
 
       if (data?.content) {
@@ -149,7 +149,7 @@ useEffect(() => {
     try {
       const newStatus = !prevStatus;
       const response = await axios.post(
-        "https://dev-erp.nifty10.in/user/updateUser",
+        "https://prod-erp.nifty10.in/user/updateUser",
         { userId: id, name: name, isActive: newStatus },
         {
           headers: {

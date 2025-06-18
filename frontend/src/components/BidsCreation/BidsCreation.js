@@ -36,7 +36,7 @@ const BidCreationForm = () => {
     const fetchMarkets = async () => {
       try {
         // Make the request to the backend
-        const response = await axios.get("https://dev-erp.nifty10.in/get/market");
+        const response = await axios.get("https://prod-erp.nifty10.in/get/market");
   
         // If markets data is returned, update the state
         if (response.data?.data) {
@@ -195,7 +195,7 @@ const BidCreationForm = () => {
           ].map(async ({ marketId, marketName }) => {
             const bidData = { ...formData, marketId, marketName };
             const response = await axios.post(
-              "https://dev-erp.nifty10.in/bids/create",
+              "https://prod-erp.nifty10.in/bids/create",
               bidData,
               { headers: { "Content-Type": "application/json" } }
             );
@@ -207,7 +207,7 @@ const BidCreationForm = () => {
         const selectedMarket = markets.find((m) => m.marketId === formData.marketId);
         const bidData = { ...formData, marketName: selectedMarket?.marketName || "" };
         const response = await axios.post(
-          "https://dev-erp.nifty10.in/bids/create",
+          "https://prod-erp.nifty10.in/bids/create",
           bidData,
           { headers: { "Content-Type": "application/json" } }
         );

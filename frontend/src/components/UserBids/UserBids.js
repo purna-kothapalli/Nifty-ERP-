@@ -17,7 +17,7 @@ const UserBids = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch("https://dev-erp.nifty10.in/users/list");
+      const response = await fetch("https://prod-erp.nifty10.in/users/list");
       const data = await response.json();
       return data.content || [];
     } catch (error) {
@@ -28,7 +28,7 @@ const UserBids = () => {
 
   const fetchUserBids = async (userId) => {
   try {
-    const url = new URL("https://dev-erp.nifty10.in/user/bids");
+    const url = new URL("https://prod-erp.nifty10.in/user/bids");
     url.searchParams.append("userId", userId); // Add userId as query param
 
     const response = await fetch(url, {

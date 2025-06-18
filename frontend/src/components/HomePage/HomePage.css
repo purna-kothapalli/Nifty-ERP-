@@ -307,7 +307,7 @@ main {
 #headerContent {
     position: fixed;
     margin-left: 40px;
-    z-index: 1;
+    z-index: 0;
 }
 
 .notification-wrapper {

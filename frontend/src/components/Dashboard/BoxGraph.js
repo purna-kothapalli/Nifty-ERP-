@@ -59,7 +59,7 @@ const BoxGraph = () => {
 
     for (const marketId of marketIds) {
       try {
-        const response = await axios.get("https://dev-erp.nifty10.in/get/bidMarket", {
+        const response = await axios.get("https://prod-erp.nifty10.in/get/bidMarket", {
           params: {
             Date: formattedDate,
             marketId,

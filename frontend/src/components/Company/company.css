@@ -43,6 +43,17 @@
   justify-content: flex-end;
   margin-right: 10px;
 }
+.custom-tooltip {
+  font-size: 13px;
+  border-radius: 8px;
+  max-width: 240px;
+}
+.__react_component_tooltip {
+  max-width: 250px;
+  font-size: 13px;
+  padding: 10px;
+  border-radius: 8px;
+}
 
 /* Page Layout */
 .company-page {
@@ -285,4 +296,16 @@ input {
 .company-stocks-container{
   margin-bottom: 250px;
 }
+}
+.company-update{
+  color: rgb(255, 104, 104);
+  font-weight: 900;
+  opacity: 80%;
+  font-size: 0.77rem;
+}
+.__react_component_tooltip.place-top:after {
+  border-top-color: #333 !important;
+}
+.__react_component_tooltip.place-bottom:after {
+  border-bottom-color: #333 !important;
 }

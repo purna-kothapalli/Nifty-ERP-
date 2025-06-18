@@ -49,16 +49,24 @@ const AllMarkets = () => {
   const [selectedBidData, setSelectedBidData] = useState(null);
   const [filledSlotsData, setFilledSlotsData] = useState({});
   const userId = "556c3d52-e18d-11ef-9b7f-02fd6cfaf985";
-
+  const [todayFormattedDate, setTodayFormattedDate] = useState();
   async function getFilledSlots() {
     const getFormattedDate = () => {
       const now = new Date();
       if (now.getHours() >= 16) {
         now.setDate(now.getDate() + 1); // Move to tomorrow if after 4 PM
       }
-      return now.toLocaleDateString("en-GB").split("/").join("-");
+      const fullFormattedDate = now.toLocaleDateString("en-GB").split("/").join("-");
+      const shortFormattedDate = now.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "short"
+    })
+      return {fullFormattedDate,shortFormattedDate};
     };
-    const formattedDate = getFormattedDate();
+    const {fullFormattedDate, shortFormattedDate} = getFormattedDate();
+    setTodayFormattedDate(shortFormattedDate);
+    
+    
 
 
     const marketIds = [
@@ -72,9 +80,9 @@ const AllMarkets = () => {
 
     for (const marketId of marketIds) {
       try {
-        const response = await axios.get("https://dev-erp.nifty10.in/get/bidMarket", {
+        const response = await axios.get("https://prod-erp.nifty10.in/get/bidMarket", {
           params: {
-            Date: formattedDate,
+            Date: fullFormattedDate,
             marketId: marketId,
             userId: userId, // ensure userId is defined in your component/scope
           },
@@ -113,7 +121,7 @@ const AllMarkets = () => {
   useEffect(() => {
     const fetchMarketData = async () => {
       try {
-        const response = await axios.get("https://dev-erp.nifty10.in/get/market");
+        const response = await axios.get("https://prod-erp.nifty10.in/get/market");
         setMarketData(response.data.data || []);
       } catch (error) {
         console.error("Error fetching market data:", error);
@@ -173,12 +181,12 @@ const AllMarkets = () => {
       }
       return now.toLocaleDateString("en-GB").split("/").join("-");
     };
-      const formattedDate = getFormattedDate();
+      const fullFormattedDate = getFormattedDate();
 
 
-      const response = await axios.get("https://dev-erp.nifty10.in/get/bidMarket", {
+      const response = await axios.get("https://prod-erp.nifty10.in/get/bidMarket", {
         params: {
-          Date: formattedDate,
+          Date: fullFormattedDate,
           marketId: marketId,
           userId: userId, // make sure userId is defined in the scope
         },
@@ -228,14 +236,14 @@ const AllMarkets = () => {
       }
       return now.toLocaleDateString("en-GB").split("/").join("-");
     };
-      const formattedDate = getFormattedDate();
+      const fullFormattedDate = getFormattedDate();
 
 
       const response = await axios.get(
-        `https://dev-erp.nifty10.in/get/bidMarket`,
+        `https://prod-erp.nifty10.in/get/bidMarket`,
         {
           params: {
-            Date: formattedDate,
+            Date: fullFormattedDate,
             marketId: marketId,
             userId: userId,
           },
@@ -275,7 +283,7 @@ const AllMarkets = () => {
       const newStatus = !prevStatus;
 
       const response = await fetch(
-        `https://dev-erp.nifty10.in/change/status?dayWiseBidId=${id}&status=${newStatus}`,
+        `https://prod-erp.nifty10.in/change/status?dayWiseBidId=${id}&status=${newStatus}`,
         { method: "GET" }
       );
 
@@ -387,7 +395,7 @@ const AllMarkets = () => {
 
       {selectedMarket && (
         <div className="markets-table-container">
-          <div className={`popup-heading ${selectedMarket}`}>{selectedMarket}</div>
+          <div className={`popup-heading ${selectedMarket}`}>{selectedMarket} ({todayFormattedDate})</div>
           <div className="table-container1">
             {dataLoading ? (
               <p className="loading-message">Loading data, please wait...</p>
@@ -395,12 +403,15 @@ const AllMarkets = () => {
               <table className="admin-table">
                 <thead>
                   <tr>
-                    <th>Index</th>
-                    <th>Value</th>
+                    
+                    <th>Bid name</th>
                     <th>Slots</th>
-                    <th>Prize Pool</th>
-                    <th>Status</th>
                     <th>First Prize</th>
+
+                    <th>Prize Pool</th>
+                    
+                    <th>Total amount</th>
+                    <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -410,10 +421,14 @@ const AllMarkets = () => {
                       onClick={() => rowSelected(row.dayWiseBidId, row.marketId)}
                       className={selectedRow === row.dayWiseBidId ? "row-active" : ""}
                     >
-                      <td>{index + 1}</td>
+                      
                       <td>{row.bidName}</td>
                       <td>{row.bidSlots}</td>
-                      <td>{row.poolPrize}</td>
+                      <td className="bid-amount">₹{row.firstPrize}</td>
+                      <td className="bid-amount">₹{row.poolPrize}</td>
+                      
+                      
+                      <td className="bid-amount">₹{row.bidName * row.bidSlots}</td>
                       <td
                         onClick={() => {
                           onClickStatus(row.dayWiseBidId, row.active);
@@ -422,7 +437,6 @@ const AllMarkets = () => {
                       >
                         {row.active ? "✅ Active" : "❌ Inactive"}
                       </td>
-                      <td>{row.firstPrize}</td>
                     </tr>
                   ))}
                 </tbody>

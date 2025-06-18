@@ -4,6 +4,10 @@ import "./company.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
+import ReactTooltip from 'react-tooltip';
+
+
+
 
 function Company() {
     const [stocks, setStocks] = useState([]);
@@ -37,7 +41,7 @@ function Company() {
     // Fetch company list on component mount
     useEffect(() => {
         axios
-            .get("https://dev-erp.nifty10.in/get/company")
+            .get("https://prod-erp.nifty10.in/get/company")
             .then((response) => {
                 let fetchedStocks = response.data.data || [];
                 setStocks(fetchedStocks.sort((a, b) => a.companyName.localeCompare(b.companyName)));
@@ -140,7 +144,7 @@ function Company() {
             };
 
             const response = await axios.post(
-                "https://dev-erp.nifty10.in/company/update",
+                "https://prod-erp.nifty10.in/company/update",
                 payload,
                 { headers: { "accept": "application/json", "Content-Type": "application/json" } }
             );
@@ -190,7 +194,7 @@ function Company() {
             };
 
             const response = await axios.post(
-                "https://dev-erp.nifty10.in/company/create",
+                "https://prod-erp.nifty10.in/company/create",
                 payload,
                 { headers: { "Accept": "application/json", "Content-Type": "application/json" } }
             );
@@ -397,12 +401,32 @@ function Company() {
             {!showModal && !isEditing && (
                 <ul className="company-stocks-container">
                     {stocks.map((stock, index) => (
-                        <li key={index} className="company-stock-box" onClick={() => handleEditConfirmation(stock)}>
+                        <li
+                            key={index}
+                            className="company-stock-box"
+                            data-tip
+                            data-for={`tooltip-${index}`}
+                            onClick={() => handleEditConfirmation(stock)}
+                        >
                             <span className="company-stock-symbol">{stock.companyName}</span>
                             <span className="company-stock-value">
                                 {isNaN(stock.companyPoint) ? "0" : Math.max(Number(stock.companyPoint), 0)}
                             </span>
+
+                            <ReactTooltip className="company-tool-tip" id={`tooltip-${index}`} effect="solid" place={index < 6 ? "bottom" : "top"}  backgroundColor="#333">
+                                <div  style={{ textAlign: "left" }}>
+                                    <p><strong>Code:</strong> {stock.companyCode}</p>
+                                    <p><strong>Status:</strong> {stock.companyStatus}</p>
+                                    <p><strong>Active:</strong> {stock.active ? "Yes" : "No"}</p>
+                                    <p><strong>Created:</strong> {new Date(stock.createdDate).toLocaleString()}</p>
+                                    <p><strong>Modified:</strong> {new Date(stock.modifiedDate).toLocaleString()}</p>
+                                    <p className="company-update">Click on the company to update </p>
+                                </div>
+                            </ReactTooltip>
                         </li>
+
+
+
                     ))}
                 </ul>
             )}

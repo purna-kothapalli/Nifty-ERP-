@@ -23,7 +23,7 @@ const BidsConfigure = () => {
 
   const fetchMarkets = async () => {
     try {
-      const res = await axios.get("https://dev-erp.nifty10.in/get/market");
+      const res = await axios.get("https://prod-erp.nifty10.in/get/market");
       setMarkets(res.data.data || []);
     } catch (err) {
       console.error("Error fetching markets:", err);
@@ -33,7 +33,7 @@ const BidsConfigure = () => {
   const fetchBids = async () => {
     try {
       // Make a request to the backend with the short URL
-      const res = await fetch("https://dev-erp.nifty10.in/bids/config");
+      const res = await fetch("https://prod-erp.nifty10.in/bids/config");
       const json = await res.json();
       
       if (json.data) {
@@ -112,7 +112,7 @@ const BidsConfigure = () => {
   
       // Sending the updated bid data to the backend
       const response = await axios.post(
-        "https://dev-erp.nifty10.in/bids/update", 
+        "https://prod-erp.nifty10.in/bids/update", 
         updatedBid,
         {
           headers: {

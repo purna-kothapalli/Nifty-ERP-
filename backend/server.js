@@ -409,7 +409,7 @@ app.post("/bids/submit-market-result", async (req, res) => {
       liveBB: true,
     }));
 
-    const url = `${API_BASE_URL}/bid/market/result?date=${todayDate}&marketId=${effectiveMarketId}&userId=${adminUserId}`;
+    const url = `${API_BASE_URL}/bid/point/result/v4?date=${todayDate}&marketId=${effectiveMarketId}&userId=${adminUserId}`;
 
     const result = await fetch(url, {
       method: "POST",

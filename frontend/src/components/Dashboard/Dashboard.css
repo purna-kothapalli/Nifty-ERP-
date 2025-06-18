@@ -390,3 +390,7 @@
     width: 600px !important;
   }
 }
+
+.dashboard-amount {
+  font-size: 20px;
+}

@@ -20,7 +20,7 @@ const HolidayConfig = () => {
 
   const fetchHolidays = async () => {
     try {
-      const response = await axios.get("https://dev-erp.nifty10.in/bids/holidays");
+      const response = await axios.get("https://prod-erp.nifty10.in/bids/holidays");
       setHolidays(response.data.data || []);
     } catch (err) {
       setError("Failed to fetch holidays.");
@@ -82,7 +82,7 @@ const HolidayConfig = () => {
         .join("-"); // Convert to DD-MM-YYYY
 
       try {
-        await axios.post("https://dev-erp.nifty10.in/bids/holiday/configuration", {
+        await axios.post("https://prod-erp.nifty10.in/bids/holiday/configuration", {
           date: formattedDate,
           name: holidayName,
         });

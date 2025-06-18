@@ -76,7 +76,7 @@ const HomePage = () => {
   // ─── Fetch notifications/messages/announcements ────────────────────────
   const fetchNotifications = async () => {
     try {
-      const response = await axios.get("https://dev-erp.nifty10.in/get/notifications");
+      const response = await axios.get("https://prod-erp.nifty10.in/get/notifications");
       const allData = response.data.data || [];
 
       const formatTS = (ts) => {
@@ -209,7 +209,7 @@ const HomePage = () => {
   const handleNewNotifSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://dev-erp.nifty10.in/api/notifications/new', {
+      const response = await fetch('https://prod-erp.nifty10.in/api/notifications/new', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newNotif),
@@ -242,7 +242,7 @@ const HomePage = () => {
     };
 
     try {
-      await axios.post("https://dev-erp.nifty10.in/post/notification", payload, {
+      await axios.post("https://prod-erp.nifty10.in/post/notification", payload, {
         headers: { "Content-Type": "application/json" },
       });
 
@@ -297,6 +297,7 @@ setIsMsgDropdownOpen(false);
     localStorage.removeItem("userToken");
     localStorage.removeItem("isOtpVerfied");
     window.location.href = "/login";
+    localStorage.setItem("activeTab", "dashboard")
   };
   const formatTS = (utcTimestamp) => {
     const date = new Date(utcTimestamp);

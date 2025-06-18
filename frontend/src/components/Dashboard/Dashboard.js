@@ -44,36 +44,36 @@ const Card = ({
                         <div className="all-time-stats">
                             <div className="user-stats-left">
                                 <p className="user-stats-label">Inflow</p>
-                                <p className="user-stats-value">₹ {data}</p>
+                                <p className="user-stats-value"><span className="bid-amount dashboard-amount">₹</span> {data}</p>
                             </div>
                             <div className="vertical-line" />
                             <div className="user-stats-right">
                                 <p className="user-stats-label">Outflow</p>
-                                <p className="user-stats-value">₹ {winningPoints}</p>
+                                <p className="user-stats-value"><span className="bid-amount dashboard-amount">₹</span> {winningPoints}</p>
                             </div>
                         </div>
                     ) : isPayoutCard ? (
                         <div className="all-time-stats">
                             <div className="user-stats-left">
                                 <p className="user-stats-label">Total</p>
-                                <p className="user-stats-value">₹ {data}</p>
+                                <p className="user-stats-value"><span className="bid-amount dashboard-amount">₹</span> {data}</p>
                             </div>
                             <div className="vertical-line" />
                             <div className="user-stats-right">
                                 <p className="user-stats-label">24 hours</p>
-                                <p className="user-stats-value">₹ 0</p>
+                                <p className="user-stats-value"><span className="bid-amount dashboard-amount">₹</span> 0</p>
                             </div>
                         </div>
                     ) : isRevenueCard ? (
                         <div className="all-time-stats">
                             <div className="user-stats-left">
                                 <p className="user-stats-label">Total</p>
-                                <p className="user-stats-value">₹ {data}</p>
+                                <p className="user-stats-value"><span className="bid-amount dashboard-amount">₹</span> {data}</p>
                             </div>
                             <div className="vertical-line" />
                             <div className="user-stats-right">
                                 <p className="user-stats-label">24 hours</p>
-                                <p className="user-stats-value">₹ 0</p> {/* You can replace this with actual 24hr revenue if available */}
+                                <p className="user-stats-value"><span className="bid-amount dashboard-amount">₹</span> 0</p> {/* You can replace this with actual 24hr revenue if available */}
                             </div>
                         </div>
                     ) : (
@@ -119,7 +119,7 @@ const Dashboard = () => {
         const fetchUserData = async () => {
             try {
                 // --- USER STATS & REVENUE/SPENT CALCULATIONS ---
-                const userRes = await axios.get("https://dev-erp.nifty10.in/get/activeUser");
+                const userRes = await axios.get("https://prod-erp.nifty10.in/get/activeUser");
                 const users = userRes.data.data || [];
                 const customers = users.filter(u => u.userType === "CUSTOMER");
                 setTotalUsers(customers.length);
@@ -165,7 +165,7 @@ const Dashboard = () => {
 
                 // --- BIDS & SPENT & WINNERS for today ---
                 try {
-                    const response = await axios.get("https://dev-erp.nifty10.in/user/metrics");
+                    const response = await axios.get("https://prod-erp.nifty10.in/user/metrics");
                     const { totalSpent, spentGrowth, totalWinningPoints } = response.data;
               
                     setTotalSpent(totalSpent || 0);

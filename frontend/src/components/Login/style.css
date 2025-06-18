@@ -109,3 +109,13 @@ body {
         font-size: 14px;
     }
 }
+.login-logo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.login-logo img {
+    width: 60px;
+    
+}

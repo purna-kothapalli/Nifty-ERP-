@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import './style.css';
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import NiftyLogo from './Nifty10-logo.png'
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -29,18 +30,18 @@ const Login = () => {
         <div className="login-main-container">
             <ToastContainer position="top-center" />
             <div className="login-container">
-                <div className="logo">
+                <div className="login-logo">
                     <img 
-                        src="https://nifty10.com/wp-content/uploads/2024/02/Logo-150x150.png" 
-                        width="40px" 
+                        src={NiftyLogo}
                         alt="Logo" 
                     />
+                    <h2 className="login-heading">LOGIN</h2>
                 </div>
-                <h2 className="login-heading">LOGIN</h2>
+                
                 {error && <p className="error">{error}</p>}
                 <form onSubmit={handleSubmit}>
                     <div className="input-box">
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="username">Username:</label>
                         <div className="input-field">
                             <i className="fas fa-user"></i>
                             <input 
@@ -55,7 +56,7 @@ const Login = () => {
                         </div>
                     </div>
                     <div className="input-box">
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password">Password:</label>
                         <div className="input-field">
                             <i className="fas fa-lock"></i> 
                             <input 
