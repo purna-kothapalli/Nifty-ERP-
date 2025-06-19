@@ -9,7 +9,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
-
+localStorage.setItem("activeTab", "dashboard");
     const handleSubmit = (e) => {
         e.preventDefault();
         // Corrected validation logic (AND condition)

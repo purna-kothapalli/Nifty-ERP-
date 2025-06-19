@@ -50,9 +50,10 @@ const DayPerformance = ({ trend, onBack, marketId }) => {
   const handleInputChange = (companyId, value) => {
     setPerformanceData((prev) => ({
       ...prev,
-      [companyId]: parseFloat(value) || 0,
+      [companyId]: value,
     }));
   };
+
 
   // Handle form submission with updated payload format and toast notifications
   const handleSubmit = async () => {
@@ -61,34 +62,40 @@ const DayPerformance = ({ trend, onBack, marketId }) => {
       toast.error("Market ID is required.");
       return;
     }
-  
+
     const payload = {
       stocks,
       trend,
       effectiveMarketId,
       performanceData,
     };
-  
+    const parsedPerformanceData = {};
+    for (const [key, val] of Object.entries(performanceData)) {
+      const numVal = parseFloat(val);
+      parsedPerformanceData[key] = isNaN(numVal) ? 0 : numVal;
+    }
+
+
     try {
       const response = await fetch("https://prod-erp.nifty10.in/bids/submit-market-result", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-  
+
       if (!response.ok) {
         const errorText = await response.text();
         console.error("Backend Error:", errorText);
         throw new Error("Failed to submit data");
       }
-  
+
       toast.success("Result submitted successfully!");
     } catch (error) {
       console.error("Submission failed:", error);
       toast.error("Submission failed.");
     }
   };
-  
+
 
   return (
     <div className="day-performance-container">
@@ -120,12 +127,15 @@ const DayPerformance = ({ trend, onBack, marketId }) => {
                   <input
                     type="number"
                     className="performance-input"
+                    min="0"
+                    step="0.01"
                     value={performanceData[stock.companyId] || ""}
                     required
                     onChange={(e) =>
                       handleInputChange(stock.companyId, e.target.value)
                     }
                   />
+
                 </td>
               </tr>
             ))}

@@ -6,24 +6,24 @@ import "react-toastify/dist/ReactToastify.css";
 
 const BidCreationForm = () => {
   const generateBidCode = () => `#MB${Math.floor(1000 + Math.random() * 9000)}`;
-  
+
   const [formData, setFormData] = useState({
     // Removed bidName input from UI.
     // bidName will be auto-set from entryFee.
     bidName: "",
     bidCode: generateBidCode(),
     entryFee: "",
-    poolPrize: "",
+    prizePoolPercentage: "",
     firstPrize: "",
     bidSlots: "",
     individualBidCount: "",  // No default value now.
-    guaranteedBidCount: "0",   
-    newDayBid: "MANUAL",       
-    companyRequired: true,     
-    bankRequired: false,       
+    guaranteedBidCount: "0",
+    newDayBid: "MANUAL",
+    companyRequired: true,
+    bankRequired: false,
     marketId: "",
     marketName: "",
-    bidType:"REGULAR",
+    bidType: "REGULAR",
     createdBy: "556c3d52-e18d-11ef-9b7f-02fd6cfaf985",
     active: true,
     prizeMasterList: [],
@@ -37,7 +37,7 @@ const BidCreationForm = () => {
       try {
         // Make the request to the backend
         const response = await axios.get("https://prod-erp.nifty10.in/get/market");
-  
+
         // If markets data is returned, update the state
         if (response.data?.data) {
           setMarkets(response.data.data);
@@ -46,26 +46,40 @@ const BidCreationForm = () => {
         console.error("Error fetching markets:", error);
       }
     };
-  
+
     fetchMarkets();
   }, []);
-  
+
 
   // Update field values. If entryFee changes, also set bidName to that value.
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+
     setFormData((prev) => {
       const updated = {
         ...prev,
         [name]: type === "checkbox" ? checked : value,
       };
 
-      // When entryFee is updated, automatically update bidName.
+      // Auto-update bidName from entryFee
       if (name === "entryFee") {
         updated.bidName = value;
       }
 
-      // If the firstPrize field is updated, update the first row in prizeMasterList
+      // Auto-update prizePool (only if prizePoolPercentage, entryFee, and bidSlots exist)
+      const entryFee = name === "entryFee" ? value : prev.entryFee;
+      const bidSlots = name === "bidSlots" ? value : prev.bidSlots;
+      const percentage = name === "prizePoolPercentage" ? value : prev.prizePoolPercentage;
+
+      const fee = parseFloat(entryFee);
+      const slots = parseFloat(bidSlots);
+      const percent = parseFloat(percentage);
+
+      if (!isNaN(fee) && !isNaN(slots) && !isNaN(percent)) {
+        updated.poolPrize = ((fee * slots * percent) / 100).toFixed(2);
+      }
+
+      // Update firstPrize in prizeMasterList
       if (name === "firstPrize") {
         let newPrizeMasterList = [...prev.prizeMasterList];
         if (newPrizeMasterList.length === 0) {
@@ -75,10 +89,11 @@ const BidCreationForm = () => {
         }
         updated.prizeMasterList = newPrizeMasterList;
       }
-      
+
       return updated;
     });
   };
+
 
   const handleMarketChange = (e) => {
     const { value } = e.target;
@@ -121,23 +136,29 @@ const BidCreationForm = () => {
     setFormData((prev) => ({ ...prev, prizeMasterList: updatedPrizes }));
   };
 
-  const validateForm = () => {
-    let newErrors = {};
-    const requiredFields = [
-      // Removed bidName from validation as it's auto-generated.
-      "entryFee",
-      "poolPrize",
-      "firstPrize",
-      "bidSlots",
-      "individualBidCount",
-      "guaranteedBidCount",
-      "marketId",
-    ];
-    requiredFields.forEach((key) => {
-      if (!formData[key]) {
-        newErrors[key] = "This field is required";
-      }
-    });
+const validateForm = () => {
+  let newErrors = {};
+
+  const requiredFields = [
+    "entryFee",
+    "poolPrize",
+    "firstPrize",
+    "bidSlots",
+    "individualBidCount",
+    "guaranteedBidCount",
+    "marketId",
+  ];
+
+  // Basic required and non-negative validation
+  requiredFields.forEach((key) => {
+    const value = parseFloat(formData[key]);
+    if (formData[key] === "") {
+      newErrors[key] = "This field is required";
+    } else if (!isNaN(value) && value < 0) {
+      newErrors[key] = "Value must be ≥ 0";
+    }
+  });
+
 
     // Validate each prize level for required fields
     formData.prizeMasterList.forEach((prize, index) => {
@@ -182,10 +203,10 @@ const BidCreationForm = () => {
     if (!validateForm()) {
       return;
     }
-  
+
     try {
       console.log("🚀 Sending Request JSON:", JSON.stringify(formData, null, 2));
-  
+
       if (formData.marketId === "bullish_bearish") {
         // Create bids for both Bullish & Bearish
         await Promise.all(
@@ -213,9 +234,9 @@ const BidCreationForm = () => {
         );
         console.log("✅ Success:", response.data);
       }
-  
+
       toast.success("Bid Created successfully!", { position: "top-right" });
-  
+
       // Reset the form
       setFormData({
         bidName: "",
@@ -241,7 +262,7 @@ const BidCreationForm = () => {
       toast.error("Failed to add Bid. Try again!", { position: "top-right" });
     }
   };
-  
+
 
   return (
     <div className="uni-bid-form-container">
@@ -258,25 +279,27 @@ const BidCreationForm = () => {
             value={formData.entryFee}
             onChange={handleChange}
             placeholder="Enter Entry Fee"
+            min="0"
             required
           />
           {errors.entryFee && <p className="uni-error-text">{errors.entryFee}</p>}
         </div>
 
         {/* Prize Pool */}
+        {/* Prize Pool % */}
         <div className="uni-form-group">
-          <label>Prize Pool</label>
+          <label>Prize Pool %</label>
           <input
             type="number"
-            name="poolPrize"
-            value={formData.poolPrize}
+            name="prizePoolPercentage"
+            value={formData.prizePoolPercentage}
             onChange={handleChange}
-            placeholder="Enter Prize Pool"
-            required
+            placeholder="Enter % of collected amount"
+            min="0"
+            step="0.01"
           />
-          {errors.poolPrize && <p className="uni-error-text">{errors.poolPrize}</p>}
-          {errors.prizeTotal && <p className="uni-error-text">{errors.prizeTotal}</p>}
         </div>
+
 
         {/* First Prize */}
         <div className="uni-form-group">
@@ -287,6 +310,7 @@ const BidCreationForm = () => {
             value={formData.firstPrize}
             onChange={handleChange}
             placeholder="Enter First Prize"
+            min="0"
             required
           />
           {errors.firstPrize && <p className="uni-error-text">{errors.firstPrize}</p>}
@@ -301,6 +325,7 @@ const BidCreationForm = () => {
             value={formData.bidSlots}
             onChange={handleChange}
             placeholder="Enter Bid Slots"
+            min="0"
             required
           />
           {errors.bidSlots && <p className="uni-error-text">{errors.bidSlots}</p>}
@@ -315,6 +340,7 @@ const BidCreationForm = () => {
             value={formData.individualBidCount}
             onChange={handleChange}
             placeholder="Enter Individual Bid Count"
+            min="0"
             required
           />
           {errors.individualBidCount && <p className="uni-error-text">{errors.individualBidCount}</p>}
@@ -395,6 +421,7 @@ const BidCreationForm = () => {
                       onChange={(e) => handlePrizeChange(index, "prize", e.target.value)}
                       required
                       disabled={index === 0}
+                      min="0"
                     />
                   </td>
                   <td>
@@ -403,6 +430,7 @@ const BidCreationForm = () => {
                       placeholder="User Count"
                       value={prize.userCount}
                       onChange={(e) => handlePrizeChange(index, "userCount", e.target.value)}
+                      min="0"
                       required
                     />
                     {errors[`prizeUser_${index}`] && (
