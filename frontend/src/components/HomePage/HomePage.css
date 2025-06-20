@@ -600,6 +600,11 @@ main {
   font-weight: bold;
 }
 
+.submenu-icon {
+  font-size: 17px !important;
+  margin-right: 5px;
+}
+
 .sidebar a {
   color: #fff;
   font-size: 1rem;

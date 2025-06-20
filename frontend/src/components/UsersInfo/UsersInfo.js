@@ -14,90 +14,120 @@ const UsersInfo = ({ setActiveTab, setSelectedUser }) => {
   const [sortOrder, setSortOrder] = useState("asc");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [extraContent, setExtraContent] = useState(false);
+  const [showExtra, setShowExtra] = useState(false);
+  const [newUsers, setNewUsers] = useState([]);
+
 
   // Show 20 users per page
   const usersPerPage = 30;
-const [currentPage, setCurrentPage] = useState(() => {
-  const saved = localStorage.getItem("usersPage");
-  return saved !== null ? parseInt(saved, 10) : 0;
-});
+  const [currentPage, setCurrentPage] = useState(() => {
+    const saved = localStorage.getItem("usersPage");
+    return saved !== null ? parseInt(saved, 10) : 0;
+  });
 
-// … rest of your state hooks …
+  // … rest of your state hooks …
 
-// 2. Persist page whenever it changes
-useEffect(() => {
-  localStorage.setItem("usersPage", currentPage);
-}, [currentPage]);
+  // 2. Persist page whenever it changes
+  useEffect(() => {
+    localStorage.setItem("usersPage", currentPage);
+  }, [currentPage]);
 
-// 3. In handleUserClick, no extra work needed for page—the effect takes care of it
-const handleUserClick = (user) => {
-  setSelectedUser(user);
-  localStorage.setItem("selectedUser", JSON.stringify(user));
-  setActiveTab("profile-card");
-};
+  // 3. In handleUserClick, no extra work needed for page—the effect takes care of it
+  const handleUserClick = (user) => {
+    setSelectedUser(user);
+    localStorage.setItem("selectedUser", JSON.stringify(user));
+    setActiveTab("profile-card");
+  };
 
-  
+
 
   // Fetch Users
-  const fetchUsers = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const response = await fetch("https://prod-erp.nifty10.in/users/list");
-      const data = await response.json();
+const fetchUsers = async () => {
+  try {
+    setLoading(true);
+    setError(null);
+    const response = await fetch(
+      "https://prod-api.nifty10.com/nif/user/list/user?size=1000"
+    );
+    const data = await response.json();
 
-      if (data?.content) {
-        setUsers(data.content);
-        setFilteredUsers(data.content);
-      } else {
-        setError("Invalid API response");
+    if (data?.data?.content) {
+      const allUsers = data.data.content;
+      setUsers(allUsers);
+      setFilteredUsers(allUsers);
+
+      // ✅ Check if View More was clicked
+      if (localStorage.getItem("showExtraUsersInfo") === "true") {
+        const now = new Date();
+        const last24Hours = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+
+        const newUserList = allUsers
+          .filter(user => new Date(user.createdDate) >= last24Hours)
+          .map(user => {
+            const referrer = allUsers.find(
+              u => u.referralCode === user.referredBy
+            );
+            return {
+              ...user,
+              referredByName: referrer?.name || "NA",
+            };
+          });
+
+        setNewUsers(newUserList);
+        setShowExtra(true);
       }
-    } catch (error) {
-      setError("Error fetching users. Please try again later.");
-    } finally {
-      setLoading(false);
+    } else {
+      setError("Invalid API response");
     }
-  };
+  } catch (error) {
+    setError("Error fetching users. Please try again later.");
+  } finally {
+    setLoading(false);
+  }
+};
+
+
 
   useEffect(() => {
     fetchUsers();
   }, []);
 
   // Filter by search and date
-// Filter by search and date + reset pagination
-useEffect(() => {
-  let updatedUsers = users.filter((user) => user.userType === "CUSTOMER");
+  // Filter by search and date + reset pagination
+  useEffect(() => {
+    let updatedUsers = users.filter((user) => user.userType === "CUSTOMER");
 
-  // Search filter
-  if (searchQuery) {
-    updatedUsers = updatedUsers.filter(
-      (user) =>
-        (user.name &&
-          user.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        (user.email &&
-          user.email.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        (user.mobileNo &&
-          String(user.mobileNo)
-            .toLowerCase()
-            .includes(searchQuery.toLowerCase()))
-    );
-  }
+    // Search filter
+    if (searchQuery) {
+      updatedUsers = updatedUsers.filter(
+        (user) =>
+          (user.name &&
+            user.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+          (user.email &&
+            user.email.toLowerCase().includes(searchQuery.toLowerCase())) ||
+          (user.mobileNo &&
+            String(user.mobileNo)
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase()))
+      );
+    }
 
-  // Date filter
-  if (filterDate) {
-    updatedUsers = updatedUsers.filter((user) => {
-      if (user.createdDate) {
-        const userDate = new Date(user.createdDate)
-          .toISOString()
-          .split("T")[0];
-        return userDate === filterDate;
-      }
-      return false;
-    });
-  }
+    // Date filter
+    if (filterDate) {
+      updatedUsers = updatedUsers.filter((user) => {
+        if (user.createdDate) {
+          const userDate = new Date(user.createdDate)
+            .toISOString()
+            .split("T")[0];
+          return userDate === filterDate;
+        }
+        return false;
+      });
+    }
 
-  setFilteredUsers(updatedUsers);
-}, [users, searchQuery, filterDate]);
+    setFilteredUsers(updatedUsers);
+  }, [users, searchQuery, filterDate]);
 
 
   // Sort only the current page's slice
@@ -297,9 +327,9 @@ useEffect(() => {
             placeholder="Search by Name, Email, or Mobile Number..."
             value={searchQuery}
             onChange={(e) => {
-                  setSearchQuery(e.target.value);
-                  setCurrentPage(0);   // reset only when user types a new query
-                }}
+              setSearchQuery(e.target.value);
+              setCurrentPage(0);   // reset only when user types a new query
+            }}
           />
         </div>
 
@@ -318,13 +348,40 @@ useEffect(() => {
             className="users-search-input"
             value={filterDate}
             onChange={(e) => {
-                  setFilterDate(e.target.value);
-                 setCurrentPage(0);   // reset only when user picks a new date
-                }}
+              setFilterDate(e.target.value);
+              setCurrentPage(0);   // reset only when user picks a new date
+            }}
             style={{ maxWidth: "200px" }}
           />
         </div>
       </div>
+      {showExtra && (
+  <div className="new-users-container">
+    <h3 className="new-users-header">🆕 New Users in the Last 24 Hours: {newUsers.length}</h3>
+    <div className="new-users-carousel">
+      <div className="new-users-track">
+        {newUsers.map((user, index) => (
+          <div className="new-user-card" key={index}>
+            <p><strong>Name:</strong> {user.name || "N/A"}</p>
+            <p><strong>Email:</strong> {user.email || "N/A"}</p>
+            <p><strong>Mobile:</strong> {user.mobileNo || "N/A"}</p>
+            <p><strong>Referred By:</strong> {user.referredByName}</p>
+            <button
+              className="show-more-btn"
+              onClick={() => {
+                setSelectedUser(user);
+                setActiveTab("profile-card");
+              }}
+            >
+              Show More →
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+)}
+
 
 
       {/* TABLE */}
@@ -406,7 +463,7 @@ useEffect(() => {
         <div
           style={{
             marginTop: "20px",
-            marginLeft:"85%",
+            marginLeft: "85%",
             display: "flex",
             alignItems: "center",
             gap: "1rem",

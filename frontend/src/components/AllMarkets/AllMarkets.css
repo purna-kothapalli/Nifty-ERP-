@@ -4,7 +4,7 @@
   display: flex;
   gap: 30px;
   justify-content: center;
-  padding: 20px;
+  padding: 1.2rem;
   background-color: #f4f4f4;
 }
 /* Ensure buttons are properly spaced */
@@ -20,7 +20,22 @@
   outline: none !important;
   box-shadow: none !important;
 }
-
+.all-inactive-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+.all-inactive-btn:disabled {
+  background-color: #757575;
+  cursor: not-allowed;
+}
+.allmarkets-header{
+  display: flex;
+}
 /* Improve button styling */
 .swal2-confirm {
   background-color: #28a745 !important; /* Green */
@@ -270,6 +285,7 @@
   left: 20px;
   z-index: 1;
   display: flex;
+ justify-content: space-between;
   padding-left: 20px;
 }
 

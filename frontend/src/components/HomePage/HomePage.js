@@ -45,7 +45,7 @@ const HomePage = () => {
     return storedUser ? JSON.parse(storedUser) : null; // Load from localStorage
   });
   const [showNewNotifForm, setShowNewNotifForm] = useState(false);
-  const [newNotif, setNewNotif] = useState({ body: '', title: '' });
+  const [newNotif, setNewNotif] = useState({ title: '', body: '' });
   const notificationRef = useRef(null);
   const messageRef = useRef(null);
   const announcementRef = useRef(null);
@@ -186,10 +186,10 @@ const HomePage = () => {
     setFormData({ notification: "", active: true, id: null });
     setIsAddModalOpen(true);
     setIsDropdownOpen(false);
-  setIsMsgDropdownOpen(false);
-  setIsAnnouncementOpen(false);
-  setIsSettingsOpen(false);
-  setIsAddModalOpen(true);  
+    setIsMsgDropdownOpen(false);
+    setIsAnnouncementOpen(false);
+    setIsSettingsOpen(false);
+    setIsAddModalOpen(true);
   };
   const closeAddModal = () => {
     setIsAddModalOpen(false);
@@ -268,7 +268,7 @@ const HomePage = () => {
       id: notif.id,
     });
     setIsDropdownOpen(false);
- setIsAddModalOpen(true);
+    setIsAddModalOpen(true);
   };
   const handleEditMessage = (msg) => {
     setAddType("Message");
@@ -277,8 +277,8 @@ const HomePage = () => {
       active: msg.active,
       id: msg.id,
     });
-setIsMsgDropdownOpen(false);
- setIsAddModalOpen(true);
+    setIsMsgDropdownOpen(false);
+    setIsAddModalOpen(true);
   };
 
   // click ✏️ next to an Announcement
@@ -289,8 +289,8 @@ setIsMsgDropdownOpen(false);
       active: ann.active,
       id: ann.id,
     });
- setIsAnnouncementOpen(false);
- setIsAddModalOpen(true);
+    setIsAnnouncementOpen(false);
+    setIsAddModalOpen(true);
   };
   // ─── Logout ────────────────────────────────────────────────────────────
   const handleLogout = () => {
@@ -328,7 +328,15 @@ setIsMsgDropdownOpen(false);
       case "market-status":
         return <MarketStatus />;
       case "users-info":
-        return <UsersInfo setActiveTab={setActiveTab} setSelectedUser={setSelectedUser} />;
+        const viewType = localStorage.getItem("userInfoView") || null;
+        return (
+          <UsersInfo
+            setActiveTab={setActiveTab}
+            setSelectedUser={setSelectedUser}
+            viewType={viewType}
+          />
+        );
+
       case "results":
         return <Results />;
       case "bids-creation":
@@ -465,7 +473,7 @@ setIsMsgDropdownOpen(false);
                   {!isCollapsed && <span className="visible">Bids Configure</span>}
                   {!isCollapsed && (
                     <i
-                      className={`fa-solid fa-chevron-${isBidsSubmenuOpen ? "down" : "right"} submenu-arrow`}
+                      className={`fa-solid fa-chevron-${isBidsSubmenuOpen ? "down" : "right"} submenu-icon`}
                     ></i>
                   )}
                 </div>
@@ -475,14 +483,16 @@ setIsMsgDropdownOpen(false);
                       className={activeTab === "bids-create" ? "active" : ""}
                       onClick={() => setActiveTab("bids-create")}
                     >
+                      <i className="fa-solid fa-plus submenu-icon"></i>
                       Create
                     </li>
                     <li
                       className={activeTab === "bids-configure" ? "active" : ""}
                       onClick={() => setActiveTab("bids-configure")}
                     >
-                      Configure
+                      <i className="fa-solid fa-pen-to-square submenu-icon"></i>Configure
                     </li>
+
                   </ul>
                 )}
               </li>
@@ -506,7 +516,10 @@ setIsMsgDropdownOpen(false);
                 </Link>
               </li>
               <li
-                onClick={() => setActiveTab("users-info")}
+                onClick={() => {
+                  localStorage.removeItem("showExtraUsersInfo"); // 🔁 Clear flag only on manual click
+                  setActiveTab("users-info");
+                }}
                 className={activeTab === "users-info" ? "active" : ""}
               >
                 <Link to="#">
@@ -514,6 +527,7 @@ setIsMsgDropdownOpen(false);
                   {!isCollapsed && <span className="visible">Users Info</span>}
                 </Link>
               </li>
+
               {/* <li
                 onClick={() => setActiveTab("admin-settings")}
                 className={activeTab === "admin-settings" ? "active admin-settings" : "admin-settings"}
@@ -648,7 +662,8 @@ setIsMsgDropdownOpen(false);
                             <input
                               type="checkbox"
                               checked={showNewNotifForm}
-                              onChange={() => {setShowNewNotifForm(prev => !prev);
+                              onChange={() => {
+                                setShowNewNotifForm(prev => !prev);
                                 setIsDropdownOpen(false);
                               }}
                             />
@@ -813,8 +828,8 @@ setIsMsgDropdownOpen(false);
                 <input
                   type="text"
                   name="title"
-                  value={newNotif.body}
-                  onChange={(e) => setNewNotif({ ...newNotif, body: e.target.value })}
+                  value={newNotif.title}
+                  onChange={(e) => setNewNotif({ ...newNotif, title: e.target.value })}
                   required
                 />
               </div>
@@ -822,8 +837,8 @@ setIsMsgDropdownOpen(false);
                 <label>Body</label>
                 <textarea
                   name="body"
-                  value={newNotif.title}
-                  onChange={(e) => setNewNotif({ ...newNotif, title: e.target.value })}
+                  value={newNotif.body}
+                  onChange={(e) => setNewNotif({ ...newNotif, body: e.target.value })}
                   required
                 />
               </div>

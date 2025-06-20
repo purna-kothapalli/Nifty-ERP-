@@ -48,6 +48,8 @@ const ProfileCard = ({ selectedUser: userId, setActiveTab }) => {
   const [bearishBids, setBearishBids] = useState(0);
   const [selectedUserId, setSelectedUserId] = useState(userId || localStorage.getItem('selectedUserId'));
 const [selectedUserInfo, setSelectedUserInfo] = useState(null);
+const [referredByName, setReferredByName] = useState("NA");
+
    // Simulating data loading
    useEffect(() => {
     // Simulate a delay, like fetching user data
@@ -58,27 +60,42 @@ const [selectedUserInfo, setSelectedUserInfo] = useState(null);
 
 
   // Fetch users from API
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const response = await fetch("https://prod-erp.nifty10.in/users/list");
-        const data = await response.json();
+useEffect(() => {
+  const fetchUsers = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const response = await fetch("https://prod-erp.nifty10.in/users/list");
+      const data = await response.json();
 
-        if (data?.content) {
-          setUsers(data.content);
+      if (data?.content) {
+        setUsers(data.content);
+
+        // Find and store referredBy name
+        const selectedUser = data.content.find(user => user.userId === selectedUserId);
+        const referredByCode = selectedUser?.referredBy;
+
+        if (referredByCode) {
+          const referrer = data.content.find(user => user.referralCode === referredByCode);
+          setReferredByName(referrer?.name || "NA");
         } else {
-          setError("Invalid API response");
+          setReferredByName("NA");
         }
-      } catch (error) {
-        setError("Error fetching users. Please try again later.");
-      } 
-    };
 
-    fetchUsers();
-    fetchUserInfo(selectedUserId);
-  }, [selectedUserId]);
+      } else {
+        setError("Invalid API response");
+      }
+    } catch (error) {
+      setError("Error fetching users. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchUsers();
+  fetchUserInfo(selectedUserId);
+}, [selectedUserId]);
+
 
   // Filter user data after users are loaded
   useEffect(() => {
@@ -294,6 +311,10 @@ if (loading) return (
     <FaMoneyBillWave className="profile-icon" /> Referral Bonus: ₹
     {userData?.referralSummary?.referralBonus ?? "0"}
   </p>
+  <p>
+  <FaUser className="profile-icon" /> Referred By: {referredByName}
+</p>
+
 </div>
 
 

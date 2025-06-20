@@ -22,6 +22,7 @@ const Card = ({
     newUsers,
     totalUsers,
     winningPoints
+    
 }) => (
     <div className="all-card dashboard-card-container">
         <div className="all-card-content dashboard-content">
@@ -92,7 +93,19 @@ const Card = ({
                         {growthRate > 0 ? "▲" : "▼"} {Math.abs(growthRate)}%
                     </span>
                     <span>{duration}</span>
-                    <a href="#markets">View More</a>
+                    <a
+  href="#users-info"
+  onClick={(e) => {
+    e.preventDefault();
+    localStorage.setItem("showExtraUsersInfo", "true");
+    localStorage.setItem("activeTab", "users-info");
+    window.location.reload(); // Refresh to re-render HomePage with new tab
+  }}
+>
+  View More
+</a>
+
+
                 </div>
             </div>
         )}
@@ -111,6 +124,8 @@ const Dashboard = () => {
     const [userPoints, setUserPoints] = useState(0);
     const [totalWinningPoints, setTotalWinningPoints] = useState(0);
     const today = new Date();
+    localStorage.setItem("extraType", "user-stats"); // or revenue, payout, etc.
+
     const bidStatsDateStr = today.toLocaleDateString("en-GB", {
       day: "2-digit",
       month: "short"
@@ -185,7 +200,7 @@ const Dashboard = () => {
     }, []);
 
     return (
-        <div className="all-markets-bg-container dashboard-container">
+        <div className="dashboard-container">
             <div className="all-cards-container dashboard-cards-container">
                 <Card
                     key="userStats"

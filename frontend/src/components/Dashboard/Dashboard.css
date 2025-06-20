@@ -1,13 +1,13 @@
 /* CardItem styling */
-.order-card {
+/* .order-card {
     background: #fff;
     border-radius: 10px;
-    padding: 30px;
-    width: 220px;
+    padding: 300px;
+    width: 2000px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-left: 10px;
     margin-top: 20px;
-  }
+  } */
   
   .order-header {
     display: flex;
@@ -78,7 +78,7 @@
   /* Graph Component */
   .chart-container {
     background: white;
-    padding: 10px;
+    padding: 0.8rem;
     border-radius: 16px;
     max-width: 100%;
     width: 750px;
@@ -90,11 +90,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 1rem;
   }
   
   .time-filters span {
-    margin: 0 5px;
+    margin: 0 0.4rem;
     color: gray;
     cursor: pointer;
   }
@@ -246,7 +246,7 @@
 /* Responsive grid breakpoints */
 @media (max-width: 1024px) {
   .all-cards-container {
-    grid-template-columns: repeat(3, 1fr); /* 3 cards in a row */
+    grid-template-columns: repeat(3, 1fr) !important; /* 3 cards in a row */
   }
   .dashboard-graph-todo {
     flex-direction: row; /* Stacks elements */
@@ -256,7 +256,7 @@
 
 @media (max-width: 768px) {
   .all-cards-container {
-    grid-template-columns: repeat(2, 1fr); /* 2 cards in a row */
+    grid-template-columns: repeat(2, 1fr) !important; /* 2 cards in a row */
   }
   
   .dashboard-graph-todo {
@@ -270,7 +270,7 @@
     flex-direction: column;
   }
   .active-date {
-    padding-top: 10px;
+    padding-top: 0.8rem;
   }
   .pie-chart-card {
     width: 250px;
@@ -287,7 +287,7 @@
 
 @media (max-width: 480px) {
   .all-cards-container {
-    grid-template-columns: repeat(1, 1fr); /* 1 card in a row */
+    grid-template-columns: repeat(1, 1fr) !important; /* 1 card in a row */
   }
 }
 
@@ -380,7 +380,7 @@
     margin-top: 10px;
   }
   .dashboard-cards-container{
-    width: 80vw;
+    /* width: 80vw; */
     display: flex;
     flex-direction: column;
     justify-content: center;

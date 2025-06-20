@@ -50,6 +50,9 @@ const AllMarkets = () => {
   const [filledSlotsData, setFilledSlotsData] = useState({});
   const userId = "556c3d52-e18d-11ef-9b7f-02fd6cfaf985";
   const [todayFormattedDate, setTodayFormattedDate] = useState();
+  const [selectedBids, setSelectedBids] = useState([]);
+const [selectAll, setSelectAll] = useState(false);
+
   async function getFilledSlots() {
     const getFormattedDate = () => {
       const now = new Date();
@@ -370,6 +373,40 @@ const AllMarkets = () => {
       }
     });
   };
+  const handleBulkDeactivate = async () => {
+  const bidsToDeactivate = tableData.filter(row =>
+    selectedBids.includes(row.dayWiseBidId) && row.active
+  );
+
+  const bidsWithFilledSlots = bidsToDeactivate.filter(row =>
+    (row.bidSlots - row.totalAvailableCount) > 0
+  );
+
+  if (bidsWithFilledSlots.length > 0) {
+    toast.error("Some selected bids have filled slots. Cannot deactivate.");
+    return;
+  }
+
+  const confirmed = await Swal.fire({
+    title: "Are you sure?",
+    text: `Do you want to deactivate ${bidsToDeactivate.length} bids?`,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Yes, deactivate",
+    cancelButtonText: "No",
+    reverseButtons: true
+  });
+
+  if (confirmed.isConfirmed) {
+    for (const bid of bidsToDeactivate) {
+      await changeActiveStatus(bid.dayWiseBidId, true); // true = was active
+    }
+    toast.success("Selected bids deactivated successfully.");
+    setSelectedBids([]);
+    setSelectAll(false);
+  }
+};
+
   return (
     <div className="all-markets-bg-container">
       <div className="all-cards-container">
@@ -395,51 +432,87 @@ const AllMarkets = () => {
 
       {selectedMarket && (
         <div className="markets-table-container">
-          <div className={`popup-heading ${selectedMarket}`}>{selectedMarket} ({todayFormattedDate})</div>
+          <div className={`popup-heading ${selectedMarket}`}><div className="allmarkets-header">{selectedMarket} ({todayFormattedDate})</div>
+            <button 
+        onClick={handleBulkDeactivate}
+        className="all-inactive-btn"
+        disabled={selectedBids.length === 0}
+      >
+        Inactive Selected
+      </button>
+          </div>
           <div className="table-container1">
             {dataLoading ? (
               <p className="loading-message">Loading data, please wait...</p>
             ) : tableData.length > 0 ? (
               <table className="admin-table">
                 <thead>
-                  <tr>
-                    
-                    <th>Bid name</th>
-                    <th>Slots</th>
-                    <th>First Prize</th>
+  <tr>
+    <th>
+      <input
+        type="checkbox"
+        checked={selectAll}
+        onChange={() => {
+          const allIds = tableData.map(row => row.dayWiseBidId);
+          setSelectAll(!selectAll);
+          setSelectedBids(!selectAll ? allIds : []);
+        }}
+      />
+    </th>
+    <th>Index</th>
+    <th>Value</th>
+    <th>Slots</th>
+    <th>Prize Pool</th>
+    <th>Status</th>
+    <th>First Prize</th>
+    <th>
+      
+    </th>
+  </tr>
+</thead>
 
-                    <th>Prize Pool</th>
-                    
-                    <th>Total amount</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
                 <tbody>
-                  {tableData.map((row, index) => (
-                    <tr
-                      key={row.dayWiseBidId}
-                      onClick={() => rowSelected(row.dayWiseBidId, row.marketId)}
-                      className={selectedRow === row.dayWiseBidId ? "row-active" : ""}
-                    >
-                      
-                      <td>{row.bidName}</td>
-                      <td>{row.bidSlots}</td>
-                      <td className="bid-amount">₹{row.firstPrize}</td>
-                      <td className="bid-amount">₹{row.poolPrize}</td>
-                      
-                      
-                      <td className="bid-amount">₹{row.bidName * row.bidSlots}</td>
-                      <td
-                        onClick={() => {
-                          onClickStatus(row.dayWiseBidId, row.active);
-                        }}
-                        className="market-table-status status-active"
-                      >
-                        {row.active ? "✅ Active" : "❌ Inactive"}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
+  {tableData.map((row, index) => {
+    const isChecked = selectedBids.includes(row.dayWiseBidId);
+    return (
+      <tr
+        key={row.dayWiseBidId}
+        onClick={() => rowSelected(row.dayWiseBidId, row.marketId)}
+        className={selectedRow === row.dayWiseBidId ? "row-active" : ""}
+      >
+        <td>
+          <input
+            type="checkbox"
+            checked={isChecked}
+            onChange={(e) => {
+              e.stopPropagation(); // prevent row click
+              const id = row.dayWiseBidId;
+              setSelectedBids((prev) =>
+                e.target.checked ? [...prev, id] : prev.filter(bidId => bidId !== id)
+              );
+            }}
+          />
+        </td>
+        <td>{index + 1}</td>
+        <td>{row.bidName}</td>
+        <td>{row.bidSlots}</td>
+        <td>{row.poolPrize}</td>
+        <td
+          onClick={(e) => {
+            e.stopPropagation();
+            onClickStatus(row.dayWiseBidId, row.active);
+          }}
+          className="market-table-status status-active"
+        >
+          {row.active ? "✅ Active" : "❌ Inactive"}
+        </td>
+        <td>{row.firstPrize}</td>
+        <td></td>
+      </tr>
+    );
+  })}
+</tbody>
+
               </table>
             ) : (
               <p className="error-msg">{errorMsg}</p>
