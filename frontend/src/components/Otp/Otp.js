@@ -2,35 +2,57 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 import "./style.css";
-
 const Otp = () => {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [generatedOtp, setGeneratedOtp] = useState("");
   const inputRefs = useRef([]);
   const navigate = useNavigate();
-  const DEFAULT_OTP = "841941";
 
-  // Skip API; just check if user is authenticated and send dummy OTP
+  // Function to send OTP via API
+const sendOtp = async () => {
+  try {
+    const mobileNo = localStorage.getItem("userMobile");
+    const response = await axios.put("http://localhost:4000/user/send-otp", { mobileNo });
+    const receivedOtp = response.data.otp;
+    if (receivedOtp) {
+      setGeneratedOtp(receivedOtp);
+    }
+  } catch (error) {
+    toast.error("Failed to send OTP. Please try again.");
+  }
+};
+
+
+  // Function to verify OTP via API
+const verifyOtp = async () => {
+  try {
+    const mobileNo = localStorage.getItem("userMobile");
+    const fullOtp = otp.join("");
+    await axios.put("http://localhost:4000/user/verify-otp", { mobileNo, otp: fullOtp });
+
+    toast.success("OTP Verified! Redirecting...");
+    localStorage.setItem("isOtpVerfied", "true");
+    console.log("OTP Verified:", localStorage.getItem("isOtpVerified"));
+    setTimeout(() => navigate("/home"), 2000);
+  } catch (error) {
+    toast.error("Invalid OTP. Please try again.");
+  }
+};
+
+
+  
+
   useEffect(() => {
     const isAuthenticated = localStorage.getItem("userToken");
     if (!isAuthenticated) {
       toast.error("You need to login first!");
       navigate("/login");
-    }
-  }, [navigate]);
-
-  const verifyOtp = () => {
-    const fullOtp = otp.join("");
-
-    if (fullOtp !== DEFAULT_OTP) {
-      toast.error("Invalid OTP. Please try again.");
       return;
     }
-
-    toast.success("OTP Verified! Redirecting...");
-    localStorage.setItem("isOtpVerfied", "true");
-    setTimeout(() => navigate("/home"), 2000);
-  };
+    sendOtp();
+  }, [navigate]);
 
   const handleChange = (index, e) => {
     const value = e.target.value;
@@ -76,7 +98,7 @@ const Otp = () => {
               />
             ))}
           </div>
-          {/* <p className="otp-hint">Hint OTP: {DEFAULT_OTP}</p> */}
+          <p className="otp-hint">Hint OTP: {generatedOtp}</p>
           <button className="verify-btn" type="submit">Verify OTP</button>
         </form>
         <p className="resend">
@@ -85,9 +107,9 @@ const Otp = () => {
             href="/otp"
             onClick={(e) => {
               e.preventDefault();
+              sendOtp();
               setOtp(["", "", "", "", "", ""]);
               inputRefs.current[0]?.focus();
-              toast.info("OTP resent.");
             }}
           >
             RESEND

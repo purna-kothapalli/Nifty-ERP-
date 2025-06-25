@@ -130,7 +130,7 @@
 }
 
 .user-bids-company-tag {
-  padding: 4px 10px;
+  /* padding: 4px 10px; */
   background-color: #f1efef;
   border-radius: 20px;
   font-size: 13px;
@@ -138,6 +138,8 @@
   align-items: center;
   gap: 6px;
   color: #333;
+  position: relative;
+  overflow: visible;
 }
 
 .user-bids-dot {
@@ -301,4 +303,34 @@
   height: 14px;
   margin-right: 5px;
   accent-color: #6f6f6f; 
+}
+/* .company-bb-icon {
+  position: relative;
+  left: -18px;
+  bottom: 13px;
+  background-color: #ffffff;
+  font-size: 0.7rem;
+  color: #8a8a8a;
+  border: 1px solid rgb(113, 113, 113);
+  border-radius: 50%;
+  padding: 12px 6px;
+  line-height: 0.5;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+} */
+.company-bb-icon {
+  position: absolute;
+  top: -10px;
+  right: -6px;
+  background-color: #ffffff;
+  color: #807f7f;
+  border: 1px solid rgb(163, 163, 163);
+  font-size: 0.5rem;
+  font-weight: bold;
+  padding: 6px 4px;
+  border-radius: 50%;
+  line-height: 1;
+  z-index: 5;
+  white-space: nowrap;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
 }

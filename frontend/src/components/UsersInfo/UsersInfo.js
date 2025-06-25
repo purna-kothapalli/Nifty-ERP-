@@ -358,7 +358,7 @@ const fetchUsers = async () => {
       {showExtra && (
   <div className="new-users-container">
     <h3 className="new-users-header">🆕 New Users in the Last 24 Hours: {newUsers.length}</h3>
-    <div className="new-users-carousel">
+    {/* <div className="new-users-carousel">
       <div className="new-users-track">
         {newUsers.map((user, index) => (
           <div className="new-user-card" key={index}>
@@ -378,7 +378,7 @@ const fetchUsers = async () => {
           </div>
         ))}
       </div>
-    </div>
+    </div> */}
   </div>
 )}
 

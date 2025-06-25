@@ -1,93 +1,126 @@
-require("dotenv").config();  
+require("dotenv").config();
 const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
+const request = require('request');
+
 const app = express();
 const PORT = 4000;
+
 const NODE_ENV = process.env.NODE_ENV || "development";
 const API_BASE_URL =
   NODE_ENV === "production"
     ? process.env.PROD_API_BASE_URL
     : process.env.DEV_API_BASE_URL;
-const adminUserId = "556c3d52-e18d-11ef-9b7f-02fd6cfaf985";
+const AUTH_KEY = process.env.AUTH_KEY
+
+const AUTH_TOKEN = process.env.AUTH_TOKEN
+
+const auth = Buffer.from(`${AUTH_KEY}:${AUTH_TOKEN}`).toString('base64');
 app.use(express.json());
-// Enable CORS with explicit settings
+
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://www.erp.nifty10.in'
+];
+
 app.use(
-    cors({
-      origin: "*", // Allow requests from frontend
-      methods: "GET,POST,PUT,DELETE",
-      allowedHeaders: "Content-Type,Authorization",
-      credentials: true, // Allow cookies if needed
-    })
-  );
-
-  app.get("/", (req, res) => {
-    return res.status(200).json({message: "Successfully Connected Backend..!", body: "Dev Is Live now..!"})
-  })
-
-  app.put("/user/send-otp", async (req, res) => {
-  const { mobileNo } = req.body;
-  
-    if (!mobileNo) {
-      return res.status(400).json({ error: "Mobile number is required" });
-    }
-  
-    try {
-      const response = await axios.put(
-        `${API_BASE_URL}/nif/user/sendOtp`,
-        {},
-        {
-          params: { mobileNo },
-        }
-      );
-  
-      res.status(200).json({ otp: response.data.data?.otp });
-    } catch (error) {
-      console.error("Send OTP Error:", error.message);
-      res.status(500).json({ error: "Failed to send OTP" });
-    }
-  });
-
-// Verify OTP (accept Otp in body)
-app.put("/user/verify-otp", async (req, res) => {
-  let { Otp } = req.body;
-
-  if (!Otp) {
-    return res.status(400).json({ error: "Otp is required" });
-  }
-
-  // Convert OTP to a number
-  Otp = Number(Otp);
-
-  if (isNaN(Otp)) {
-    return res.status(400).json({ error: "Otp must be a valid number" });
-  }
-
-  try {
-    console.log("Verifying OTP with payload:", {
-      Otp,
-      userId: adminUserId,
-    });
-
-    await axios.put(
-      `${API_BASE_URL}/nif/user/verifyOtp`,
-      {},
-      {
-        params: {
-          Otp,
-          userId: adminUserId,
-        },
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
       }
-    );
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
 
-    res.status(200).json({ message: "OTP verified successfully" });
-  } catch (error) {
-    console.log("adminUserId:", adminUserId);
-    console.error("OTP Verification Error:", error.message);
-    res.status(500).json({ error: "OTP verification failed" });
-  }
+
+app.get("/", (req, res) => {
+  return res.status(200).json({
+    message: "Successfully Connected Backend..!",
+    body: "Dev Is Live now..!",
+  });
 });
 
+const otpStore = {}; // For dev/testing. Use Redis/DB in production
+app.put("/user/send-otp", async (req, res) => {
+  const { mobileNo } = req.body;
+
+  if (!mobileNo || !/^\d{10}$/.test(mobileNo)) {
+    return res.status(400).json({ error: "Valid 10-digit mobile number is required" });
+  }
+
+  // 🔐 Generate OTP
+  const otp = Math.floor(100000 + Math.random() * 900000);
+  const smsText = `Dear User, use this OTP ${otp} to login to your Nifty10 App. It's only valid for 10 minutes - Finpages`;
+
+  const options = {
+    method: 'POST',
+    url: `https://restapi.smscountry.com/v0.1/Accounts/${AUTH_KEY}/SMSes/`,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${auth}`
+    },
+    json: {
+      Text: smsText,
+      Number: `91${mobileNo}`,
+      SenderId: "FINPGS",
+      DRNotifyUrl: "",
+      DRNotifyHttpMethod: "POST",
+      Tool: "API"
+    }
+  };
+
+  request(options, (error, response, body) => {
+    if (error) {
+      console.error("SMS Send Error:", error);
+      return res.status(500).json({ error: "Failed to send OTP" });
+    }
+
+    otpStore[mobileNo] = {
+      otp,
+      createdAt: Date.now()
+    };
+
+    return res.status(200).json({ message: "OTP sent successfully", mobileNo, otp }); // OTP in response (dev only)
+  });
+});
+
+app.put("/user/verify-otp", async (req, res) => {
+  const { mobileNo, otp: submittedOtp } = req.body;
+
+  if (!mobileNo || !submittedOtp) {
+    return res.status(400).json({ error: "Mobile number and OTP are required" });
+  }
+
+  const record = otpStore[mobileNo];
+
+  if (!record) {
+    return res.status(400).json({ error: "OTP not found or expired" });
+  }
+const isOtpValid = String(record.otp) === String(submittedOtp); // 🔥 safest fix
+
+  const isExpired = (Date.now() - record.createdAt) > 5 * 60 * 1000; // 5 minutes
+
+  if (isExpired) {
+    delete otpStore[mobileNo];
+    return res.status(400).json({ error: "OTP expired" });
+  }
+
+  if (!isOtpValid) {
+    return res.status(401).json({ error: "Invalid OTP" });
+  }
+
+  // Clean up after successful verification
+  delete otpStore[mobileNo];
+
+  res.status(200).json({ message: "OTP verified successfully" });
+});
 
 app.get("/get/company", async (req, res) => {
     try {

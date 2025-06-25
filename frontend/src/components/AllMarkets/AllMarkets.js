@@ -429,7 +429,6 @@ const [selectAll, setSelectAll] = useState(false);
         )}
         <ToastContainer position="top-right" style={{ marginTop: "65px" }} />
       </div>
-
       {selectedMarket && (
         <div className="markets-table-container">
           <div className={`popup-heading ${selectedMarket}`}><div className="allmarkets-header">{selectedMarket} ({todayFormattedDate})</div>

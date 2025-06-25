@@ -205,7 +205,6 @@ const validateForm = () => {
     }
 
     try {
-      console.log("🚀 Sending Request JSON:", JSON.stringify(formData, null, 2));
 
       if (formData.marketId === "bullish_bearish") {
         // Create bids for both Bullish & Bearish
@@ -220,7 +219,6 @@ const validateForm = () => {
               bidData,
               { headers: { "Content-Type": "application/json" } }
             );
-            console.log("✅ Success for marketId", marketId, response.data);
           })
         );
       } else {

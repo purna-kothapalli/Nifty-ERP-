@@ -10,21 +10,27 @@ const Login = () => {
     const [error, setError] = useState("");
     const navigate = useNavigate();
 localStorage.setItem("activeTab", "dashboard");
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Corrected validation logic (AND condition)
-        if (username === "admin" && password === "finpages") {
-            setError("");
-            toast.success("OTP Sent To Your Mobile!", { autoClose: 2000 });
-            localStorage.setItem("userToken", "authenticated");
-            setTimeout(() => navigate("/otp"), 2000);
-            
+   const userMap = {
+  purna: { password: "finpages", mobileNo: "7893863597" },
+  sudarshan: { password: "finpages", mobileNo: "7013302191" },
+  chaithanya: { password: "finpages", mobileNo: "9966093939" },
+  admin: { password: "finpages", mobileNo: "7842441345" },
+};
 
-        } else {
-            setError("Invalid username or password!");
-            toast.error("Invalid Credentials. Please try again.", { autoClose: 2000 });
-        }
-    };
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const user = userMap[username];
+
+  if (user && user.password === password) {
+    toast.success("OTP Sent To Your Mobile!", { autoClose: 2000 });
+    localStorage.setItem("userToken", "authenticated");
+    localStorage.setItem("userMobile", user.mobileNo); // Store mobile number
+    setTimeout(() => navigate("/otp"), 2000);
+  } else {
+    setError("Invalid username or password!");
+    toast.error("Invalid Credentials. Please try again.", { autoClose: 2000 });
+  }
+};
 
     return (
         <div className="login-main-container">

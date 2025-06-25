@@ -198,8 +198,6 @@ function Company() {
                 payload,
                 { headers: { "Accept": "application/json", "Content-Type": "application/json" } }
             );
-
-            console.log("API Response:", response.data);
             toast.success("Company added successfully!", { position: "top-right" });
 
             setTimeout(() => {
