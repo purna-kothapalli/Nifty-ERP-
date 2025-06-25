@@ -14,7 +14,7 @@ const Otp = () => {
 const sendOtp = async () => {
   try {
     const mobileNo = localStorage.getItem("userMobile");
-    const response = await axios.put("http://localhost:4000/user/send-otp", { mobileNo });
+    const response = await axios.put("https://prod-erp.nifty10.in/user/send-otp", { mobileNo });
     const receivedOtp = response.data.otp;
     if (receivedOtp) {
       setGeneratedOtp(receivedOtp);
@@ -30,10 +30,10 @@ const verifyOtp = async () => {
   try {
     const mobileNo = localStorage.getItem("userMobile");
     const fullOtp = otp.join("");
-    await axios.put("http://localhost:4000/user/verify-otp", { mobileNo, otp: fullOtp });
+    await axios.put("https://prod-erp.nifty10.in/user/verify-otp", { mobileNo, otp: fullOtp });
 
     toast.success("OTP Verified! Redirecting...");
-    localStorage.setItem("isOtpVerfied", "true");
+    localStorage.setItem("isOtpVerified", "true");
     console.log("OTP Verified:", localStorage.getItem("isOtpVerified"));
     setTimeout(() => navigate("/home"), 2000);
   } catch (error) {
